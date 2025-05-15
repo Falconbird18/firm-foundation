@@ -4,6 +4,35 @@
     import BibleVerseHover from "$lib/components/BibleVerseHover.svelte";
 </script>
 
+<div class="hero">
+    <div class="hero-content">
+        <h1>Build Your Faith on Solid Ground</h1>
+        <p>Explore deep theological truths with clear, biblical answers to life's biggest questions</p>
+        <div class="cta-buttons">
+            <a href="/library" class="cta-primary">Browse Articles</a>
+            <a href="/about" class="cta-secondary">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<section class="featured-articles">
+    <h2>Popular Articles</h2>
+    <div class="article-grid">
+        <a href="firm-foundation/library/is-jesus-god" class="article-card">
+            <h3>Is Jesus Really God?</h3>
+            <p>Explore the biblical evidence for the deity of Christ</p>
+        </a>
+        <a href="firm-foundation/library/bible-reliability" class="article-card">
+            <h3>Is the Bible Reliable?</h3>
+            <p>Discover the historical and textual evidence for the Bible's reliability</p>
+        </a>
+        <a href="firm-foundation/library/trinity" class="article-card">
+            <h3>Understanding the Trinity</h3>
+            <p>Learn about the nature of God as three persons in one being</p>
+        </a>
+    </div>
+</section>
+
 <div class="text-container">
     <ArticleTitle title="Is Jesus really God?" />
     <QuickAnswer
@@ -79,6 +108,109 @@
 </div>
 
 <style>
+    .hero {
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        /* background: linear-gradient(135deg, var(--background) 0%, var(--background-2) 100%); */
+        background-image: url('/front.png');
+        padding: 2rem;
+    }
+
+    .hero-content {
+        max-width: 800px;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .cta-primary, .cta-secondary {
+        padding: 1rem 2rem;
+        border-radius: var(--primary-radius);
+        text-decoration: none;
+        color: var(--text);
+        font-family: 'Roboto';
+        font-weight: 300;
+        font-size: 1.2rem;
+        transition: transform 0.2s;
+    }
+
+    .cta-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+    }
+
+    .cta-secondary {
+        background: var(--background-3);
+        color: var(--text);
+    }
+
+    .cta-primary:hover, .cta-secondary:hover {
+        transform: translateY(-2px);
+    }
+
+    .featured-articles {
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .featured-articles h2 {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--text);
+    }
+
+    .article-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .article-card {
+        background: var(--background-2);
+        padding: 2rem;
+        border-radius: var(--secondary-radius);
+        text-decoration: none;
+        transition: transform 0.2s;
+    }
+
+    .article-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .article-card h3 {
+        color: var(--primary);
+        margin: 0 0 1rem 0;
+    }
+
+    .article-card p {
+        color: var(--text);
+        margin: 0;
+        opacity: 0.9;
+    }
+
     .text-container {
         width: 55vw;
         text-align: justify;
