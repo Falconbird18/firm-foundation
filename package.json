@@ -5,12 +5,13 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && touch .nojekyll",
+		"build": "vite build",
+		"postbuild": "touch build/.nojekyll",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"deploy": "npm run build && gh-pages -d build -t true"
+		"deploy": "npm run build && gh-pages -d build --dotfiles"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^6.0.0",
