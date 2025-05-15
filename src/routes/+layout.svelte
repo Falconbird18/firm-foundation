@@ -13,8 +13,9 @@
             <a href="/" class="logo">Firm Foundation</a>
         </div>
         <div class="nav-right">
-            <a href="/library">Library</a>
-            <a href="/about">About</a>
+            <a href="/firm-foundation/basics">Christian basics</a>
+            <a href="/firm-foundation/library">Library</a>
+            <a href="/firm-foundation/about">About</a>
         </div>
     </nav>
 </header>
@@ -54,13 +55,15 @@
         color: var(--primary);
         font-size: 1.5rem;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 300;
+        font-family: 'Roboto';
     }
 
     .nav-right a {
         color: var(--text);
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 300;
+        font-family: 'Roboto';
     }
 
     .nav-right a:hover {
