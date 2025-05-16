@@ -53,7 +53,6 @@
         position: relative;
         top: 0;
         left: 0;
-        /* transform: translateY(0.1em); */
     }
 
     .close-mark {
