@@ -191,18 +191,28 @@
             <div class="sub-cards-container">
                 <div class="sub-card">
                     <img src="creation.png" class="card-image" />
-                    <h2>God created man</h2>
+                    <h2>The first sin</h2>
                     <p>
-                        God created the first man — Adam — in his own image,
-                        imbuing him with some of the characteristics of himself
-                        such as love, compassion, and the ability to reason
-                        <BibleCitation verseRef="Genesis 1:27" verseText="God created man in His own image, in the image of God He created him; male and female He created them." />.
-                        God created the first woman — Eve — from Adam to be a
-                        companion and joy to him.
-                        <BibleCitation verseRef="Genesis 2:21-22" verseText="[v21]So the Lord God caused a deep sleep to fall upon the man, and he slept; then He took one of his ribs and closed up the flesh at that place. [v22] The Lord God fashioned into a woman the rib which He had taken from the man, and brought her to the man." />.
+                        Adam and Eve sinned when they ate the fruit of the tree
+                        of the knowledge of good and evil
+                        <BibleCitation verseRef="Genesis 3:6" verseText={'When the woman saw that the tree was good for food, and that it was a delight to the eyes, and that the tree was desirable to make _one_ wise, she took from its fruit and ate; and she gave also to her husband with her, and he ate.'} />,
+                        which God had
+                        commanded them not to eat
+                        <BibleCitation verseRef="Genesis 2:16-17" verseText={'[v16]The Lord God commanded the man, saying, "From any tree of the garden you may eat freely; [v17] but from the tree of the knowledge of good and evil you shall not eat, for in the day that you eat from it you will surely die."'} />
+                        after they had been deceived
+                        by Satan, a fallen archangel who was in the form of a
+                        snake
+                        <BibleCitation verseRef="Revelation 12:9" verseText={'And the great dragon was thrown down, the serpent of old who is called the devil and Satan, who deceives the whole world; he was thrown down to the earth, and his angels were thrown down with him.'} />.
+                        By sinning, Adam and Eve disobeyed God and
+                        brought death and disease into the world
+                        <BibleCitation verseRef="Genesis 3:17-19" verseText={'[v17]Then to Adam He said, "Because you have listened to the voice of your wife, and have eaten from the tree about which I commanded you, saying, \'You shall not eat from it\'; Cursed is the ground because of you; [br] In toil you will eat of it [br] All the days of your life. [v18]\"Both thorns and thistles it shall grow for you; [br] And you will eat the plants of the field; By the sweat of your face [br] You will eat bread, [br] Till you return to the ground [br] Because from it you were taken; [br] For you are dust, [br] And to dust you shall return.\""'} />
+                        <BibleCitation verseRef="Revelation 12:9" verseText={'And the great dragon was thrown down, the serpent of old who is called the devil and Satan, who deceives the whole world; he was thrown down to the earth, and his angels were thrown down with him.'} />,
+                        and the whole
+                        of creation was affected by their sin.
+                        
                     </p>
                 </div>
-                <div class="sub-card">
+                <div class="sub-card">                        <BibleCitation verseRef="Revelation 12:9" verseText={'And the great dragon was thrown down, the serpent of old who is called the devil and Satan, who deceives the whole world; he was thrown down to the earth, and his angels were thrown down with him.'} />.
                     <img src="creation.png" class="card-image" />
                     <h2>The sabbath</h2>
                     <p>

@@ -20,15 +20,26 @@
 
     // Reactive statement to process verseText for inline verse numbers
     $: processedVerseText = (String(verseText ?? '')) // Ensure verseText is treated as a string, defaulting null/undefined to empty string
+        .replace( // Process line breaks first - simple and non-interfering
+            /\[br\]/g,
+            "<br>"
+        )
+        .replace( // Then italics
+            /_([^_]+)_/g, // Matches text between single underscores. $1 captures the content.
+            "<em>$1</em>"    // Wraps with <em> for semantic italics
+        )
+        .replace( // Then single quotes (for nested quotes) - (?<!=) is a good safeguard for user input
+            /(?<!=)'([^']+)'/g, 
+            "<q class='inner-quote'>‘$1’</q>" // Wraps with <q> and typographic single quotes
+        )
+        .replace( // Then double quotes (main quotes)
+            /"([^"]+)"/g, // Matches text between double quotes. $1 captures the content inside.
+            "<span class='verse-quote'>“$1”</span>" // Use single quotes for HTML attributes for consistency
+        )
         .replace(
             /\[v(\d+)\]/g,
             // Use single quotes for HTML attributes to avoid conflict with quote processing
-            "<sup class='verse-num-ingroup'>$1</sup> "
-        )
-        .replace(
-            /"([^"]+)"/g, // Matches text between double quotes. $1 captures the content inside.
-            // Use single quotes for HTML attributes here too for consistency, and typographic quotes for content
-            "<span class='verse-quote'>“$1”</span>"
+            "<sup class='verse-num-ingroup'>$1</sup> " // HTML generation for verse numbers is now last
         );
 </script>
 
@@ -110,5 +121,11 @@
     /* Style for quoted text within the popover */
     :global(.verse-quote) {
         font-style: italic;
+    }
+
+    /* Style for nested single quotes */
+    :global(q.inner-quote) {
+        quotes: none; /* Disable browser-default quotes for <q> as we provide them */
+        /* font-style: italic; /* Optional: if inner quotes should also be distinct */
     }
 </style>
