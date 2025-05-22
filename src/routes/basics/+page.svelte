@@ -169,28 +169,52 @@
                     <h2>The sabbath</h2>
                     <p>
                         God had finished creating the universe, and behold, it was very good 
-                        <BibleCitation verseRef="Genesis 1:31" verseText="God saw all that He had made, and behold, it was very good. And there was evening and there was morning, the sixth day." />.
+                        <BibleCitation verseRef="Genesis 1:31" verseText="God saw all that He had made, and behold, it was very good. And there was evening and there was morning, the sixth day." />,
+                        meaning that it was perfect and complete; there was no evil, sin, or death.
                         God rested on the seventh day, and He blessed and sanctified it as a holy day of rest
-                        <BibleCitation verseRef="Genesis 2:2-3" verseText="[v2]By the seventh day God completed His work which He had done, and He rested on the seventh day from all His work which He had done. [v3]Then God blessed the seventh day and sanctified it, because in it He rested from all His work which God had created and made." />.
+                        <BibleCitation verseRef="Genesis 2:2-3" verseText={'[v2]By the seventh day God completed His work which He had done, and He rested on the seventh day from all His work which He had done. [v3]Then God blessed the seventh day and sanctified it, because in it He rested from all His work which God had created and made.'} />.
                     </p>
                 </div>
             </div>
         </section>
-
         <section class="content-section" id="the-fall">
             <h1 class="colored-header">The Fall</h1>
+            <img src="creation.png" class="card-image" />
             <div class="card-flex">
                 <div class="card-text">
                     <p>
-                        Genesis 1:1 says <Quote
-                            quote="In the beginning God created the heavens and the earth."
-                        /> Christians believe that God created the universe in 6
-                        days approximately 6,000 years ago, and that God created
-                        man in his own image.
+                        Adam and Eve were happy. They lived in perfect harmony with God and had fulfilling work to do <BibleCitation verseRef="Genesis 1:28" verseText={'God blessed them; and God said to them, "Be fruitful and multiply, and fill the earth, and subdue it; and rule over the fish of the sea and over the birds of the sky and over every living thing that moves on the earth."'} /> Christians believe that God the trinity created the universe
+                        out of nothing in 6 regular days approximately 6,000 years
+                        ago. God specialized the earth for life and created every
+                        family of life.
                     </p>
-                    <a href="/library" class="cta-primary">Learn more</a>
                 </div>
-                <img src="creation.png" class="card-image" />
+            </div>
+            <div class="sub-cards-container">
+                <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
+                    <h2>God created man</h2>
+                    <p>
+                        God created the first man — Adam — in his own image,
+                        imbuing him with some of the characteristics of himself
+                        such as love, compassion, and the ability to reason
+                        <BibleCitation verseRef="Genesis 1:27" verseText="God created man in His own image, in the image of God He created him; male and female He created them." />.
+                        God created the first woman — Eve — from Adam to be a
+                        companion and joy to him.
+                        <BibleCitation verseRef="Genesis 2:21-22" verseText="[v21]So the Lord God caused a deep sleep to fall upon the man, and he slept; then He took one of his ribs and closed up the flesh at that place. [v22] The Lord God fashioned into a woman the rib which He had taken from the man, and brought her to the man." />.
+                    </p>
+                </div>
+                <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
+                    <h2>The sabbath</h2>
+                    <p>
+                        God had finished creating the universe, and behold, it was very good 
+                        <BibleCitation verseRef="Genesis 1:31" verseText="God saw all that He had made, and behold, it was very good. And there was evening and there was morning, the sixth day." />,
+                        meaning that it was perfect and complete; there was no evil, sin, or death.
+                        God rested on the seventh day, and He blessed and sanctified it as a holy day of rest
+                        <BibleCitation verseRef="Genesis 2:2-3" verseText="[v2]By the seventh day God completed His work which He had done, and He rested on the seventh day from all His work which He had done. [v3]Then God blessed the seventh day and sanctified it, because in it He rested from all His work which God had created and made." />.
+                    </p>
+                </div>
             </div>
         </section>
 

@@ -19,11 +19,17 @@
     });
 
     // Reactive statement to process verseText for inline verse numbers
-    // Looks for placeholders like [v2], [v3] and replaces them with styled <sup> tags.
-    $: processedVerseText = verseText.replace(
-        /\[v(\d+)\]/g,
-        '<sup class="verse-num-ingroup">$1</sup> ', // $1 is the captured number, add a space after
-    );
+    $: processedVerseText = (String(verseText ?? '')) // Ensure verseText is treated as a string, defaulting null/undefined to empty string
+        .replace(
+            /\[v(\d+)\]/g,
+            // Use single quotes for HTML attributes to avoid conflict with quote processing
+            "<sup class='verse-num-ingroup'>$1</sup> "
+        )
+        .replace(
+            /"([^"]+)"/g, // Matches text between double quotes. $1 captures the content inside.
+            // Use single quotes for HTML attributes here too for consistency, and typographic quotes for content
+            "<span class='verse-quote'>“$1”</span>"
+        );
 </script>
 
 <span class="citation-wrapper" title={verseRef || "View citation"}>
@@ -64,13 +70,12 @@
         min-width: 250px;
         max-width: 400px;
         padding: 1rem;
-        /* Updated background properties for proper blur effect */
         background-color: var(--background-2-trans);
-        backdrop-filter: blur(50px);
+        backdrop-filter: blur(150px);
         border: var(--border);
         border-radius: var(--primary-radius);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 100;
+        z-index: 1000;
         text-align: left;
         font-size: 0.9rem;
         line-height: 1.5;
@@ -95,11 +100,15 @@
 
     /* Style for inline verse numbers within the popover text */
     :global(.verse-num-ingroup) {
-        /* Use :global if <sup> is directly in slot, not needed here as it's generated */
-        font-weight: 600; /* Make them slightly bolder */
-        font-size: 0.75em; /* Slightly smaller than surrounding text */
-        vertical-align: super; /* Ensure proper superscript alignment */
-        margin: 0 0.1em; /* Tiny bit of space around the number */
-        color: var(--primary); /* Use primary color or another subtle color */
+        font-weight: 600;
+        font-size: 0.75em;
+        vertical-align: super;
+        margin: 0 0.1em;
+        color: var(--primary);
+    }
+
+    /* Style for quoted text within the popover */
+    :global(.verse-quote) {
+        font-style: italic;
     }
 </style>
