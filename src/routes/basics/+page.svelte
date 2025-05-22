@@ -183,10 +183,8 @@
             <div class="card-flex">
                 <div class="card-text">
                     <p>
-                        Adam and Eve were happy. They lived in perfect harmony with God and had fulfilling work to do <BibleCitation verseRef="Genesis 1:28" verseText={'God blessed them; and God said to them, "Be fruitful and multiply, and fill the earth, and subdue it; and rule over the fish of the sea and over the birds of the sky and over every living thing that moves on the earth."'} /> Christians believe that God the trinity created the universe
-                        out of nothing in 6 regular days approximately 6,000 years
-                        ago. God specialized the earth for life and created every
-                        family of life.
+                        Adam and Eve were happy. They lived in perfect harmony with God and had fulfilling work to do <BibleCitation verseRef="Genesis 1:28" verseText={'God blessed them; and God said to them, "Be fruitful and multiply, and fill the earth, and subdue it; and rule over the fish of the sea and over the birds of the sky and over every living thing that moves on the earth."'} />.
+                        However, Adam and Eve sinned and introduced death and disease to the world. 
                     </p>
                 </div>
             </div>
@@ -343,7 +341,6 @@
         display: flex;
         width: 100%;
         flex: 1; /* Allow .card-flex to grow and fill remaining vertical space */
-        overflow: hidden;
         justify-content: space-between;
         align-items: center;
     }
