@@ -52,7 +52,9 @@
 
 <style>
     header {
-        background: var(--background-2);
+        background: var(--background-2-trans);
+        backdrop-filter: blur(150px);
+        border-bottom: var(--border);
         position: fixed;
         top: 0;
         left: 0;

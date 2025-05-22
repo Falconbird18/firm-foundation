@@ -7,6 +7,7 @@
     --background-2-trans: #20202025;
     --background-3: #363D49;
     --text: #cad3f5;
+    --border: 0.25px solid rgba(176, 176, 206, 0.1);
     --primary-radius: 30px;
     --secondary-radius: 15px;
     --spacing-unit: 1rem;

@@ -264,8 +264,6 @@
         flex-direction: column; /* Arrange children (h1, .card-flex) vertically */
     }
 
-    /* .background-image styles removed as the div is removed */
-
     .card-image {
         margin: 0;
         width: 45%;
@@ -309,6 +307,7 @@
     .intro-container {
         padding-left: 10vw;
         padding-right: 10vw;
+        padding-top: 5vh;
         color: var(--text);
         overflow-x: hidden; /* Prevent horizontal scroll from animations */
     }
