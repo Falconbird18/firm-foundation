@@ -155,23 +155,23 @@
                     <img src="creation.png" class="card-image" />
                     <h2>God created man</h2>
                     <p>
-                        God created the first man -- Adam -- in his own image, imbuing him with some
-                        of the characteristics of himself such as love, compassion,
-                        and the ability to reason. God created the first woman -- Eve -- from Adam to be a companion and joy to him.
+                        God created the first man — Adam — in his own image,
+                        imbuing him with some of the characteristics of himself
+                        such as love, compassion, and the ability to reason
+                        <BibleCitation verseRef="Genesis 1:27" verseText="God created man in His own image, in the image of God He created him; male and female He created them." />.
+                        God created the first woman — Eve — from Adam to be a
+                        companion and joy to him.
+                        <BibleCitation verseRef="Genesis 2:21-22" verseText="[v21]So the Lord God caused a deep sleep to fall upon the man, and he slept; then He took one of his ribs and closed up the flesh at that place. [v22] The Lord God fashioned into a woman the rib which He had taken from the man, and brought her to the man." />.
                     </p>
-                    <p>
-                        This is some text discussing a concept, and here is a reference to
-                        <BibleCitation verseRef="John 3:16" verseText="For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life." />.
-                        As you can see, the numbering will be automatic. Here is another one:
-                        <BibleCitation verseRef="Romans 8:28" verseText="And we know that for those who love God all things work together for good, for those who are called according to his purpose." />
-                    </p>
-                    
                 </div>
                 <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
                     <h2>The sabbath</h2>
                     <p>
-                        Content for the second smaller card. This demonstrates
-                        the side-by-side layout.
+                        God had finished creating the universe, and behold, it was very good 
+                        <BibleCitation verseRef="Genesis 1:31" verseText="God saw all that He had made, and behold, it was very good. And there was evening and there was morning, the sixth day." />.
+                        God rested on the seventh day, and He blessed and sanctified it as a holy day of rest
+                        <BibleCitation verseRef="Genesis 2:2-3" verseText="[v2]By the seventh day God completed His work which He had done, and He rested on the seventh day from all His work which He had done. [v3]Then God blessed the seventh day and sanctified it, because in it He rested from all His work which God had created and made." />.
                     </p>
                 </div>
             </div>
