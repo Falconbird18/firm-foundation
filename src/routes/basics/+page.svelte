@@ -142,11 +142,29 @@
                     <p>
                         Genesis 1:1 says <Quote
                             quote="In the beginning God created the heavens and the earth."
-                        /> Christians believe that God created the universe in 6
-                        days approximately 6,000 years ago, and that God created
-                        man in his own image.
+                        /> Christians believe that God the trinity created the universe
+                        out of nothing in 6 regular days approximately 6,000 years
+                        ago. God specialized the earth for life and created every
+                        family of life.
                     </p>
-                    <a href="/library" class="cta-primary">Learn more</a>
+                </div>
+            </div>
+            <div class="sub-cards-container">
+                <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
+                    <h2>God created man</h2>
+                    <p>
+                        God created the first man -- Adam -- in his own image, imbuing him with some
+                        of the characteristics of himself such as love, compassion,
+                        and the ability to reason. God created the first woman -- Eve -- from Adam to be a companion and joy to him.
+                    </p>
+                </div>
+                <div class="sub-card">
+                    <h2>The sabbath</h2>
+                    <p>
+                        Content for the second smaller card. This demonstrates
+                        the side-by-side layout.
+                    </p>
                 </div>
             </div>
         </section>
@@ -264,10 +282,26 @@
         flex-direction: column; /* Arrange children (h1, .card-flex) vertically */
     }
 
+    .sub-cards-container {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .sub-card {
+        flex: 1;
+        background-color: var(--background-2-trans);
+        backdrop-filter: blur(150px);
+        padding: 1rem;
+        border-radius: var(--primary-radius);
+        border: var(--border);
+    }
+
     .card-image {
         margin: 0;
-        width: 45%;
-        height: 100%; /* This will now be 100% of the calculated height of .card-flex */
+        width: 100%;
+        height: auto;
         object-fit: cover;
         border-radius: var(--primary-radius);
     }
@@ -283,8 +317,9 @@
     }
 
     .card-text {
-        width: 50%;
-        text-align: justify;
+        width: 50vw;
+        height: 100%;
+        text-align: left;
         margin: 0;
     }
 
@@ -334,16 +369,6 @@
     .right-image {
         width: 50vw;
         border-radius: var(--primary-radius);
-    }
-
-    .intro-header h1 {
-        font-size: 2.8rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .intro-header p {
-        font-size: 1.2rem;
-        opacity: 0.9;
     }
 
     .colored-header {
