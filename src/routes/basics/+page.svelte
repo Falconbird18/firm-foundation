@@ -5,7 +5,10 @@
     import { onMount, onDestroy } from "svelte";
     import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
 
+    const SCROLL_TARGET_OFFSET = 80; // Should match .content-section scroll-margin-top
+
     let noHeaderSectionRef; // Will hold the DOM element with id="no-header"
+    let activeSectionId = ""; // Holds the ID of the currently active section for sidebar
 
     const handlePageScroll = () => {
         if (noHeaderSectionRef) {
@@ -26,11 +29,55 @@
 
     onMount(() => {
         noHeaderSectionRef = document.getElementById("no-header");
+        const sections = Array.from(
+            document.querySelectorAll(".main-content .content-section"),
+        );
+
         window.addEventListener("scroll", handlePageScroll, { passive: true });
         handlePageScroll(); // Initial check for scroll position on load
 
+        if (sections.length > 0) {
+            // Set initial active section if one is at the top, otherwise default to first
+            // The observer will quickly correct this if needed.
+            const firstSectionRect = sections[0].getBoundingClientRect();
+            if (
+                firstSectionRect.top <= SCROLL_TARGET_OFFSET + 5 &&
+                firstSectionRect.top >= SCROLL_TARGET_OFFSET - 5
+            ) {
+                activeSectionId = sections[0].id;
+            } else if (
+                firstSectionRect.top < SCROLL_TARGET_OFFSET &&
+                firstSectionRect.bottom > SCROLL_TARGET_OFFSET
+            ) {
+                activeSectionId = sections[0].id;
+            } else if (window.scrollY === 0) {
+                activeSectionId = sections[0].id;
+            }
+        }
+
+        const observerOptions = {
+            root: null, // relative to viewport
+            rootMargin: `-${SCROLL_TARGET_OFFSET}px 0px -${window.innerHeight - SCROLL_TARGET_OFFSET - 1}px 0px`,
+            threshold: 0.0, // Trigger if any part of the element crosses this 1px "tripwire"
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    activeSectionId = entry.target.id;
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(
+            observerCallback,
+            observerOptions,
+        );
+        sections.forEach((section) => observer.observe(section));
+
         return () => {
             window.removeEventListener("scroll", handlePageScroll);
+            observer.disconnect();
             // When this component is destroyed (e.g., navigating away),
             // reset the header to visible. The next page/component
             // can then decide if it needs to be hidden again.
@@ -58,25 +105,46 @@
 <div class="page-layout">
     <nav class="sidebar">
         <ul>
-            <li><a href="#creation">Creation</a></li>
-            <li><a href="#the-fall">The Fall</a></li>
-            <li><a href="#the-promise">The Promise</a></li>
-            <li><a href="#new-hope">A New Hope</a></li>
+            <li>
+                <a
+                    href="#creation"
+                    class:active={activeSectionId === "creation"}>Creation</a
+                >
+            </li>
+            <li>
+                <a
+                    href="#the-fall"
+                    class:active={activeSectionId === "the-fall"}>The Fall</a
+                >
+            </li>
+            <li>
+                <a
+                    href="#the-promise"
+                    class:active={activeSectionId === "the-promise"}
+                    >The Promise</a
+                >
+            </li>
+            <li>
+                <a
+                    href="#new-hope"
+                    class:active={activeSectionId === "new-hope"}>A New Hope</a
+                >
+            </li>
         </ul>
     </nav>
 
     <main class="main-content" id="no-header">
         <section class="content-section" id="creation">
             <h1 class="colored-header">In the beginning...</h1>
+            <img src="creation.png" class="card-image" />
             <div class="card-flex">
-                <img src="creation.png" class="card-image" />
                 <div class="card-text">
                     <p>
                         Genesis 1:1 says <Quote
                             quote="In the beginning God created the heavens and the earth."
-                        /> Christians believe that God created the universe in 6 days
-                        approximately 6,000 years ago, and that God created man in his
-                        own image.
+                        /> Christians believe that God created the universe in 6
+                        days approximately 6,000 years ago, and that God created
+                        man in his own image.
                     </p>
                     <a href="/library" class="cta-primary">Learn more</a>
                 </div>
@@ -90,9 +158,9 @@
                     <p>
                         Genesis 1:1 says <Quote
                             quote="In the beginning God created the heavens and the earth."
-                        /> Christians believe that God created the universe in 6 days
-                        approximately 6,000 years ago, and that God created man in his
-                        own image.
+                        /> Christians believe that God created the universe in 6
+                        days approximately 6,000 years ago, and that God created
+                        man in his own image.
                     </p>
                     <a href="/library" class="cta-primary">Learn more</a>
                 </div>
@@ -159,6 +227,7 @@
     }
 
     .sidebar li a {
+        position: relative; /* For positioning the ::after pseudo-element */
         display: block;
         padding: 0.75rem 1rem;
         text-decoration: none;
@@ -167,33 +236,32 @@
         transition: background-color 0.2s ease;
     }
 
+    .sidebar li a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -0.33rem;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        border-radius: var(--primary-radius);
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+    }
+
     .sidebar li a:hover {
         background-color: var(--background-2);
     }
 
     .main-content {
-        flex-grow: 1; /* Takes remaining space */
-        padding-top: 10vh; /* Replicates old card-stack top padding */
+        flex-grow: 1;
         box-sizing: border-box;
     }
 
     .content-section {
-        /* Formerly .card styles, adapted */
-        box-shadow:
-            0.5px 0.5px 1px 1px rgba(176, 176, 206, 0.212) inset,
-            -0.5px -0.5px 1px 1px rgba(17, 17, 20, 0.37);
-        border: 0.5px solid rgba(176, 176, 206, 0.37);
-        background-color: var(--background-2-trans);
-        backdrop-filter: blur(50px);
-        border-radius: var(--primary-radius);
-        /* height: 90vh; Removed - height will be natural */
-        width: 100%; /* Takes full width of its container (.main-content padding handles spacing) */
-        padding: 1.5rem;
+        width: 100%;
+        height: fit-content;
         margin-bottom: 2em;
-        transition: all 0.3s ease;
         display: flex; /* Make .card a flex container */
         flex-direction: column; /* Arrange children (h1, .card-flex) vertically */
-        scroll-margin-top: 80px; /* Adjust if you have a fixed header, to prevent overlap on jump */
     }
 
     /* .background-image styles removed as the div is removed */
@@ -279,12 +347,12 @@
         opacity: 0.9;
     }
 
-    .colored-header { /* Changed from ID to class */
+    .colored-header {
+        /* Changed from ID to class */
         background: linear-gradient(-45deg, var(--primary), var(--secondary));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         width: fit-content;
-        margin: 0 auto 1em auto; /* Added bottom margin for spacing, kept auto horizontal margins */
     }
 </style>
