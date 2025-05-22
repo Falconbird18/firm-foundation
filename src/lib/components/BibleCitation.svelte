@@ -6,6 +6,8 @@
     export let verseText = "No verse text provided.";
     /** The Bible verse reference, e.g., "John 3:16". Displayed as a title in the popover. */
     export let verseRef = "";
+    /** If true, the popover will have a wider max-width for longer texts. */
+    export let wide = false;
 
     let currentNumber;
     let processedVerseText; // Declare processedVerseText here
@@ -45,7 +47,7 @@
 
 <span class="citation-wrapper" title={verseRef || "View citation"}>
     <sup class="citation-number">{currentNumber}</sup>
-    <div class="citation-popover">
+    <div class="citation-popover" class:popover-wide={wide}>
         {#if verseRef}
             <strong class="verse-reference">{verseRef}</strong>
         {/if}
@@ -78,8 +80,7 @@
         bottom: 100%;
         left: 50%;
         transform: translateX(-50%) translateY(-8px);
-        min-width: 250px;
-        max-width: 400px;
+        width: 15vw;
         padding: 1rem;
         background-color: var(--background-2-trans);
         backdrop-filter: blur(150px);
@@ -91,6 +92,10 @@
         font-size: 0.9rem;
         line-height: 1.5;
         color: var(--text);
+    }
+
+    .citation-popover.popover-wide {
+        width: 25vw;
     }
 
     .citation-wrapper:hover .citation-popover {
