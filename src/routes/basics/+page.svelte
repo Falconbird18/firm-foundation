@@ -2,6 +2,7 @@
     import { fly, fade } from "svelte/transition";
     import { quintOut } from "svelte/easing"; // For smoother animations
     import Quote from "$lib/components/Quote.svelte";
+    import BibleCitation from "$lib/components/BibleCitation.svelte";
     import { onMount, onDestroy } from "svelte";
     import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
 
@@ -158,6 +159,13 @@
                         of the characteristics of himself such as love, compassion,
                         and the ability to reason. God created the first woman -- Eve -- from Adam to be a companion and joy to him.
                     </p>
+                    <p>
+                        This is some text discussing a concept, and here is a reference to
+                        <BibleCitation verseRef="John 3:16" verseText="For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life." />.
+                        As you can see, the numbering will be automatic. Here is another one:
+                        <BibleCitation verseRef="Romans 8:28" verseText="And we know that for those who love God all things work together for good, for those who are called according to his purpose." />
+                    </p>
+                    
                 </div>
                 <div class="sub-card">
                     <h2>The sabbath</h2>
@@ -292,7 +300,7 @@
     .sub-card {
         flex: 1;
         background-color: var(--background-2-trans);
-        backdrop-filter: blur(150px);
+        /* backdrop-filter: blur(150px); */
         padding: 1rem;
         border-radius: var(--primary-radius);
         border: var(--border);
