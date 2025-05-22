@@ -191,14 +191,6 @@
             <div class="sub-cards-container">
                 <div class="sub-card">
                     <img src="creation.png" class="card-image" />
-                    <h2>The promise</h2>
-                    <p>
-                    </p>
-                </div>
-            </div>
-            <div class="sub-cards-container">
-                <div class="sub-card">
-                    <img src="creation.png" class="card-image" />
                     <h2>The first sin</h2>
                     <p>
                         Adam and Eve sinned when they ate the fruit of the tree
