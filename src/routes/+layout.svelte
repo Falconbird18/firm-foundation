@@ -1,11 +1,9 @@
 <script>
     import "../app.css";
-    import Sidebar from "$lib/components/Sidebar.svelte";
     import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
     import { fly } from "svelte/transition";
     import { quintOut } from "svelte/easing"; // For smooth animation
 
-    let isSidebarOpen = false;
     let actualHeaderHeight = 0; // Will be bound to the header's clientHeight
 
     // Determine the padding for the main content based on header visibility and height
@@ -30,10 +28,9 @@
     <header bind:clientHeight={actualHeaderHeight} transition:fly={{ y: -20, duration: 300, easing: quintOut }}>
         <nav class="main-nav">
             <div class="nav-left">
-                <button class="menu-button" on:click={() => (isSidebarOpen = !isSidebarOpen)}>
-                    <span class="menu-icon"></span>
-                </button>
-                <a href="/" class="logo">Firm Foundation</a>
+                <a href="/" class="logo">
+                    <img src="logo.svg" alt="Logo">
+                    Firm Foundation</a>
             </div>
             <div class="nav-right">
                 <a href="/firm-foundation/basics">Christian basics</a>
@@ -66,7 +63,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 2rem;
+        padding: 1rem 1.5rem;
         max-width: 1400px;
         margin: 0 auto;
     }
@@ -78,11 +75,18 @@
     }
 
     .logo {
-        color: var(--primary);
+        color: var(--text);
         font-size: 1.5rem;
         text-decoration: none;
         font-weight: 300;
         font-family: 'Roboto';
+        align-items: center;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .logo img {
+        height: 2rem;
     }
 
     .nav-right a {
