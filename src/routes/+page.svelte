@@ -5,10 +5,18 @@
 </script>
 
 <div class="hero">
+    <video autoplay muted loop class="hero-video-background">
+        <source src="video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
     <div class="hero-content">
         <h1>Build Your Faith on Solid Ground</h1>
-        <p>Explore deep theological truths with clear, biblical answers to life's biggest questions</p>
+        <p>
+            Explore deep theological truths with clear, biblical answers to
+            life's biggest questions
+        </p>
         <div class="cta-buttons">
+            <!-- Consider making these buttons slightly more prominent if the video is busy -->
             <a href="/library" class="cta-primary">Browse Articles</a>
             <a href="/about" class="cta-secondary">Learn More</a>
         </div>
@@ -22,9 +30,15 @@
             <h3>Is Jesus Really God?</h3>
             <p>Explore the biblical evidence for the deity of Christ</p>
         </a>
-        <a href="firm-foundation/library/bible-reliability" class="article-card">
+        <a
+            href="firm-foundation/library/bible-reliability"
+            class="article-card"
+        >
             <h3>Is the Bible Reliable?</h3>
-            <p>Discover the historical and textual evidence for the Bible's reliability</p>
+            <p>
+                Discover the historical and textual evidence for the Bible's
+                reliability
+            </p>
         </a>
         <a href="firm-foundation/library/trinity" class="article-card">
             <h3>Understanding the Trinity</h3>
@@ -89,9 +103,9 @@
         </li>
 
         <li>
-            <b>Jesus could not be both God and man</b> – Since Jesus was raised from the
-            dead by God's power, some believe this indicates that he was not God
-            himself but rather a servant of God.
+            <b>Jesus could not be both God and man</b> – Since Jesus was raised from
+            the dead by God's power, some believe this indicates that he was not
+            God himself but rather a servant of God.
         </li>
 
         <li>
@@ -105,23 +119,31 @@
             some argue that Jesus' death proves he was not God.
         </li>
     </ol>
-
-    <p></p>
 </div>
 
 <style>
     .hero {
+        position: relative; /* For positioning the video background */
         height: 80vh;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        /* background: linear-gradient(135deg, var(--background) 0%, var(--background-2) 100%); */
-        background-image: url('/front.png');
         padding: 2rem;
+        overflow: hidden; /* Ensures video doesn't spill out */
+        background: transparent;
+    }
+
+    .hero-video-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Covers the area, cropping as needed, like background-size: cover */
     }
 
     .hero-content {
+        position: relative; /* Ensures content stays on top of the video */
+        z-index: 1;
         max-width: 800px;
     }
 
@@ -147,12 +169,13 @@
         justify-content: center;
     }
 
-    .cta-primary, .cta-secondary {
+    .cta-primary,
+    .cta-secondary {
         padding: 1rem 2rem;
         border-radius: var(--primary-radius);
         text-decoration: none;
         color: var(--text);
-        font-family: 'Roboto';
+        font-family: "Roboto";
         font-weight: 300;
         font-size: 1.2rem;
         transition: transform 0.2s;
@@ -168,7 +191,8 @@
         color: var(--text);
     }
 
-    .cta-primary:hover, .cta-secondary:hover {
+    .cta-primary:hover,
+    .cta-secondary:hover {
         transform: translateY(-2px);
     }
 

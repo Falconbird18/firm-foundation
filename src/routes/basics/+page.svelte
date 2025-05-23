@@ -158,21 +158,33 @@
                         God created the first man — Adam — in his own image,
                         imbuing him with some of the characteristics of himself
                         such as love, compassion, and the ability to reason
-                        <BibleCitation verseRef="Genesis 1:27" verseText="God created man in His own image, in the image of God He created him; male and female He created them." />.
-                        God created the first woman — Eve — from Adam to be a
-                        companion and joy to him.
-                        <BibleCitation verseRef="Genesis 2:21-22" verseText="[v21]So the Lord God caused a deep sleep to fall upon the man, and he slept; then He took one of his ribs and closed up the flesh at that place. [v22] The Lord God fashioned into a woman the rib which He had taken from the man, and brought her to the man." />.
+                        <BibleCitation
+                            verseRef="Genesis 1:27"
+                            verseText="God created man in His own image, in the image of God He created him; male and female He created them."
+                        />. God created the first woman — Eve — from Adam to be
+                        a companion and joy to him.
+                        <BibleCitation
+                            verseRef="Genesis 2:21-22"
+                            verseText="[v21]So the Lord God caused a deep sleep to fall upon the man, and he slept; then He took one of his ribs and closed up the flesh at that place. [v22] The Lord God fashioned into a woman the rib which He had taken from the man, and brought her to the man."
+                        />.
                     </p>
                 </div>
                 <div class="sub-card">
                     <img src="creation.png" class="card-image" />
                     <h2>The sabbath</h2>
                     <p>
-                        God had finished creating the universe, and behold, it was very good 
-                        <BibleCitation verseRef="Genesis 1:31" verseText="God saw all that He had made, and behold, it was very good. And there was evening and there was morning, the sixth day." />,
-                        meaning that it was perfect and complete; there was no evil, sin, or death.
-                        God rested on the seventh day, and He blessed and sanctified it as a holy day of rest
-                        <BibleCitation verseRef="Genesis 2:2-3" verseText={'[v2]By the seventh day God completed His work which He had done, and He rested on the seventh day from all His work which He had done. [v3]Then God blessed the seventh day and sanctified it, because in it He rested from all His work which God had created and made.'} />.
+                        God had finished creating the universe, and behold, it
+                        was very good
+                        <BibleCitation
+                            verseRef="Genesis 1:31"
+                            verseText="God saw all that He had made, and behold, it was very good. And there was evening and there was morning, the sixth day."
+                        />, meaning that it was perfect and complete; there was
+                        no evil, sin, or death. God rested on the seventh day,
+                        and He blessed and sanctified it as a holy day of rest
+                        <BibleCitation
+                            verseRef="Genesis 2:2-3"
+                            verseText={"[v2]By the seventh day God completed His work which He had done, and He rested on the seventh day from all His work which He had done. [v3]Then God blessed the seventh day and sanctified it, because in it He rested from all His work which God had created and made."}
+                        />.
                     </p>
                 </div>
             </div>
@@ -183,8 +195,12 @@
             <div class="card-flex">
                 <div class="card-text">
                     <p>
-                        Adam and Eve were happy. They lived in perfect harmony with God and had fulfilling work to do <BibleCitation verseRef="Genesis 1:28" verseText={'God blessed them; and God said to them, "Be fruitful and multiply, and fill the earth, and subdue it; and rule over the fish of the sea and over the birds of the sky and over every living thing that moves on the earth."'} />.
-                        However, Adam and Eve sinned and introduced death and disease to the world. 
+                        Adam and Eve were happy. They lived in perfect harmony
+                        with God and had fulfilling work to do <BibleCitation
+                            verseRef="Genesis 1:28"
+                            verseText={'God blessed them; and God said to them, "Be fruitful and multiply, and fill the earth, and subdue it; and rule over the fish of the sea and over the birds of the sky and over every living thing that moves on the earth."'}
+                        />. However, Adam and Eve sinned and introduced death
+                        and disease to the world.
                     </p>
                 </div>
             </div>
@@ -195,30 +211,49 @@
                     <p>
                         Adam and Eve sinned when they ate the fruit of the tree
                         of the knowledge of good and evil
-                        <BibleCitation verseRef="Genesis 3:6" verseText={'When the woman saw that the tree was good for food, and that it was a delight to the eyes, and that the tree was desirable to make _one_ wise, she took from its fruit and ate; and she gave also to her husband with her, and he ate.'} />,
-                        which God had
-                        commanded them not to eat
-                        <BibleCitation verseRef="Genesis 2:16-17" verseText={'[v16]The Lord God commanded the man, saying, "From any tree of the garden you may eat freely; [v17] but from the tree of the knowledge of good and evil you shall not eat, for in the day that you eat from it you will surely die."'} />
-                        after they had been deceived
-                        by Satan, a fallen archangel who was in the form of a
-                        snake
-                        <BibleCitation verseRef="Revelation 12:9" verseText={'And the great dragon was thrown down, the serpent of old who is called the devil and Satan, who deceives the whole world; he was thrown down to the earth, and his angels were thrown down with him.'} />.
-                        By sinning, Adam and Eve disobeyed God and
-                        brought death and disease into the world
-                        <BibleCitation verseRef="Genesis 3:17-19" verseText={'[v17]Then to Adam He said, "Because you have listened to the voice of your wife, and have eaten from the tree about which I commanded you, saying, \'You shall not eat from it\'; Cursed is the ground because of you; [br] In toil you will eat of it [br] All the days of your life. [v18]"Both thorns and thistles it shall grow for you; [br] And you will eat the plants of the field; By the sweat of your face [br] You will eat bread, [br] Till you return to the ground [br] Because from it you were taken; [br] For you are dust, [br] And to dust you shall return.\""'} wide/>
-                        <BibleCitation verseRef="Romans 5:12" verseText={'Therefore, just as through one man sin entered into the world, and death through sin, and so death spread to all men, because all sinned'} />
-                        and the whole
-                        of creation was affected by their sin
-                        <BibleCitation verseRef="Romans 8:20-22" verseText={'[v20]For the creation was subjected to futility, not willingly, but because of Him who subjected it, in hope [v21] that the creation itself also will be set free from its slavery to corruption into the freedom of the glory of the children of God. [v22]For we know that the whole creation groans and suffers the pains of childbirth together until now.'} />.
+                        <BibleCitation
+                            verseRef="Genesis 3:6"
+                            verseText={"When the woman saw that the tree was good for food, and that it was a delight to the eyes, and that the tree was desirable to make _one_ wise, she took from its fruit and ate; and she gave also to her husband with her, and he ate."}
+                        />, which God had commanded them not to eat
+                        <BibleCitation
+                            verseRef="Genesis 2:16-17"
+                            verseText={'[v16]The Lord God commanded the man, saying, "From any tree of the garden you may eat freely; [v17] but from the tree of the knowledge of good and evil you shall not eat, for in the day that you eat from it you will surely die."'}
+                        />
+                        after they had been deceived by Satan, a fallen archangel
+                        who was in the form of a snake
+                        <BibleCitation
+                            verseRef="Revelation 12:9"
+                            verseText={"And the great dragon was thrown down, the serpent of old who is called the devil and Satan, who deceives the whole world; he was thrown down to the earth, and his angels were thrown down with him."}
+                        />. By sinning, Adam and Eve disobeyed God and brought
+                        death and disease into the world
+                        <BibleCitation
+                            verseRef="Genesis 3:17-19"
+                            verseText={'[v17]Then to Adam He said, "Because you have listened to the voice of your wife, and have eaten from the tree about which I commanded you, saying, \'You shall not eat from it\'; Cursed is the ground because of you; [br] In toil you will eat of it [br] All the days of your life. [v18]"Both thorns and thistles it shall grow for you; [br] And you will eat the plants of the field; By the sweat of your face [br] You will eat bread, [br] Till you return to the ground [br] Because from it you were taken; [br] For you are dust, [br] And to dust you shall return.""'}
+                            wide
+                        />
+                        <BibleCitation
+                            verseRef="Romans 5:12"
+                            verseText={"Therefore, just as through one man sin entered into the world, and death through sin, and so death spread to all men, because all sinned"}
+                        />
+                        and the whole of creation was affected by their sin
+                        <BibleCitation
+                            verseRef="Romans 8:20-22"
+                            verseText={"[v20]For the creation was subjected to futility, not willingly, but because of Him who subjected it, in hope [v21] that the creation itself also will be set free from its slavery to corruption into the freedom of the glory of the children of God. [v22]For we know that the whole creation groans and suffers the pains of childbirth together until now."}
+                        />.
                     </p>
                 </div>
                 <div class="sub-card">
                     <img src="creation.png" class="card-image" />
                     <h2>The expulsion</h2>
                     <p>
-                        As a result of their disobedience, Adam and Eve were expelled from the Garden of Eden
-                        <BibleCitation verseRef="Genesis 3:23-24" verseText={'[v23]therefore the Lord God sent him out from the garden of Eden, to cultivate the ground from which he was taken. [v24]So He drove the man out; and at the east of the garden of Eden He stationed the cherubim and the flaming sword which turned every direction to guard the way to the tree of life.'} />.
-                        This marked the end of humanity's direct relationship with God in the Garden and the beginning of a new chapter in human history.
+                        As a result of their disobedience, Adam and Eve were
+                        expelled from the Garden of Eden
+                        <BibleCitation
+                            verseRef="Genesis 3:23-24"
+                            verseText={"[v23]therefore the Lord God sent him out from the garden of Eden, to cultivate the ground from which he was taken. [v24]So He drove the man out; and at the east of the garden of Eden He stationed the cherubim and the flaming sword which turned every direction to guard the way to the tree of life."}
+                        />. This marked the end of humanity's direct
+                        relationship with God in the Garden and the beginning of
+                        a new chapter in human history.
                     </p>
                 </div>
             </div>
@@ -227,9 +262,16 @@
                     <img src="creation.png" class="card-image" />
                     <h2>The promise</h2>
                     <p>
-                        Despite the consequences of sin, God gave Adam and Eve hope for the future by promising to send a Savior who would defeat Satan and restore humanity's relationship with God
-                        <BibleCitation verseRef="Genesis 3:15" verseText={'And I will put enmity Between you and the woman, [br] And between your seed and her seed; [br] He shall bruise you on the head, [br] And you shall bruise him on the heel.'} />.
-                        This promise was the first glimpse of God's plan of redemption, which would ultimately be fulfilled through Jesus Christ.
+                        Despite the consequences of sin, God gave Adam and Eve
+                        hope for the future by promising to send a Savior who
+                        would defeat Satan and restore humanity's relationship
+                        with God
+                        <BibleCitation
+                            verseRef="Genesis 3:15"
+                            verseText={"And I will put enmity Between you and the woman, [br] And between your seed and her seed; [br] He shall bruise you on the head, [br] And you shall bruise him on the heel."}
+                        />. This promise was the first glimpse of God's plan of
+                        redemption, which would ultimately be fulfilled through
+                        Jesus Christ.
                     </p>
                 </div>
             </div>
