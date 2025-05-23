@@ -1,8 +1,6 @@
 <script>
     import "../app.css";
     import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
-    import { fly } from "svelte/transition";
-    import { quintOut } from "svelte/easing"; // For smooth animation
 
     let actualHeaderHeight = 0; // Will be bound to the header's clientHeight
 
@@ -40,8 +38,6 @@
         </nav>
     </header>
 {/if}
-
-<Sidebar isOpen={isSidebarOpen} />
 
 <main style:padding-top={mainPaddingTop}>
     <slot />
@@ -98,39 +94,6 @@
 
     .nav-right a:hover {
         color: var(--primary);
-    }
-
-    .menu-button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.5rem;
-    }
-
-    .menu-icon {
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: var(--text);
-        position: relative;
-    }
-
-    .menu-icon::before,
-    .menu-icon::after {
-        content: '';
-        position: absolute;
-        width: 24px;
-        height: 2px;
-        background: var(--text);
-        left: 0;
-    }
-
-    .menu-icon::before {
-        top: -8px;
-    }
-
-    .menu-icon::after {
-        bottom: -8px;
     }
 
     main {
