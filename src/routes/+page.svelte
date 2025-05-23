@@ -1,12 +1,33 @@
 <script>
+    import { onMount } from 'svelte';
     import ArticleTitle from "$lib/components/ArticleTitle.svelte";
     import QuickAnswer from "$lib/components/QuickAnswer.svelte";
     import BibleVerseHover from "$lib/components/BibleVerseHover.svelte";
+
+    let videoElement;
+
+    const introVideoFile = "intro-video.webm"; // Video to play once
+    const loopingVideoFile = "repeating-video.webm"; // Video to play on repeat after the intro
+
+    onMount(() => {
+        if (videoElement) {
+            videoElement.src = introVideoFile;
+            videoElement.loop = false; // Ensure intro video doesn't loop
+
+            const playLoopingVideo = () => {
+                videoElement.src = loopingVideoFile;
+                videoElement.loop = true;
+                videoElement.play().catch(error => console.error("Error playing looping video:", error));
+            };
+
+            videoElement.addEventListener('ended', playLoopingVideo, { once: true });
+        }
+    });
 </script>
 
 <div class="hero">
-    <video autoplay muted loop class="hero-video-background">
-        <source src="video.mp4" type="video/mp4" />
+    <video bind:this={videoElement} autoplay muted class="hero-video-background">
+        <!-- The video source will be set by the script above -->
         Your browser does not support the video tag.
     </video>
     <div class="hero-content">
@@ -131,7 +152,7 @@
         text-align: center;
         padding: 2rem;
         overflow: hidden; /* Ensures video doesn't spill out */
-        background: transparent;
+        background: var(--background);
     }
 
     .hero-video-background {
@@ -139,6 +160,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover; /* Covers the area, cropping as needed, like background-size: cover */
+        background-color: transparent; /* Ensure video element itself is transparent */
     }
 
     .hero-content {
@@ -150,10 +172,6 @@
     .hero h1 {
         font-size: 3.5rem;
         margin-bottom: 1.5rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
     }
 
     .hero p {
