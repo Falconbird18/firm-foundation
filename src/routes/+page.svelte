@@ -144,23 +144,22 @@
 
 <style>
     .hero {
-        position: relative; /* For positioning the video background */
+        position: relative;
         height: 80vh;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         padding: 2rem;
-        overflow: hidden; /* Ensures video doesn't spill out */
         background: var(--background);
     }
 
     .hero-video-background {
         position: absolute;
         width: 100%;
-        height: 100%;
-        object-fit: cover; /* Covers the area, cropping as needed, like background-size: cover */
-        background-color: transparent; /* Ensure video element itself is transparent */
+        height: 100vh;
+        object-fit: cover;
+        background-color: transparent;
     }
 
     .hero-content {
