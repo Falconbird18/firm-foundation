@@ -1,33 +1,70 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
     import ArticleTitle from "$lib/components/ArticleTitle.svelte";
     import QuickAnswer from "$lib/components/QuickAnswer.svelte";
     import BibleVerseHover from "$lib/components/BibleVerseHover.svelte";
 
-    let videoElement;
+    let introVideoElement;
+    let loopingVideoElement;
 
     const introVideoFile = "intro-video.webm"; // Video to play once
     const loopingVideoFile = "repeating-video.webm"; // Video to play on repeat after the intro
 
-    onMount(() => {
-        if (videoElement) {
-            videoElement.src = introVideoFile;
-            videoElement.loop = false; // Ensure intro video doesn't loop
+    let introEndedListener = null;
 
-            const playLoopingVideo = () => {
-                videoElement.src = loopingVideoFile;
-                videoElement.loop = true;
-                videoElement.play().catch(error => console.error("Error playing looping video:", error));
+    onMount(() => {
+        if (introVideoElement && loopingVideoElement) {
+            // Configure and start loading the looping video in the background
+            loopingVideoElement.src = loopingVideoFile;
+            loopingVideoElement.loop = true;
+            loopingVideoElement.muted = true; // Essential for autoplay and consistency
+            loopingVideoElement.load(); // Explicitly tell the browser to start loading
+
+            // Configure the intro video
+            introVideoElement.src = introVideoFile;
+            introVideoElement.muted = true; // autoplay requires muted
+            // `autoplay` attribute is on the tag, but an explicit play() can be a fallback
+            introVideoElement.play().catch(error => {
+                console.error("Error attempting to play intro video:", error);
+            });
+
+            const switchToLoopingVideo = () => {
+                introVideoElement.style.display = 'none';
+                loopingVideoElement.style.display = 'block';
+                loopingVideoElement.play().catch(error => console.error("Error playing looping video:", error));
             };
 
-            videoElement.addEventListener('ended', playLoopingVideo, { once: true });
+            // Store listener for cleanup
+            introEndedListener = switchToLoopingVideo;
+            introVideoElement.addEventListener('ended', introEndedListener, { once: true });
+        }
+
+        return () => {
+            // Cleanup event listener
+            if (introVideoElement && introEndedListener) {
+                introVideoElement.removeEventListener('ended', introEndedListener);
+            }
+            // Optional: pause videos if they might still be playing
+            if (introVideoElement) {
+                introVideoElement.pause();
+            }
+            if (loopingVideoElement) {
+                loopingVideoElement.pause();
+            }
         }
     });
 </script>
 
 <div class="hero">
-    <video bind:this={videoElement} autoplay muted class="hero-video-background">
-        <!-- The video source will be set by the script above -->
+    <!-- Intro Video -->
+    <video bind:this={introVideoElement} autoplay muted class="hero-video-background">
+        <!-- src will be set by script -->
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Looping Video (initially hidden) -->
+    <video bind:this={loopingVideoElement} loop muted class="hero-video-background" style="display:none;">
+        <!-- src will be set by script, loop and muted attributes are set -->
         Your browser does not support the video tag.
     </video>
     <div class="hero-content">
