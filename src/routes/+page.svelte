@@ -1,5 +1,5 @@
 <script>
-    import { onMount, onDestroy } from 'svelte';
+    import { onMount, onDestroy } from "svelte";
     import ArticleTitle from "$lib/components/ArticleTitle.svelte";
     import QuickAnswer from "$lib/components/QuickAnswer.svelte";
     import BibleVerseHover from "$lib/components/BibleVerseHover.svelte";
@@ -24,25 +24,34 @@
             introVideoElement.src = introVideoFile;
             introVideoElement.muted = true; // autoplay requires muted
             // `autoplay` attribute is on the tag, but an explicit play() can be a fallback
-            introVideoElement.play().catch(error => {
+            introVideoElement.play().catch((error) => {
                 console.error("Error attempting to play intro video:", error);
             });
 
             const switchToLoopingVideo = () => {
-                introVideoElement.style.display = 'none';
-                loopingVideoElement.style.display = 'block';
-                loopingVideoElement.play().catch(error => console.error("Error playing looping video:", error));
+                introVideoElement.style.display = "none";
+                loopingVideoElement.style.display = "block";
+                loopingVideoElement
+                    .play()
+                    .catch((error) =>
+                        console.error("Error playing looping video:", error),
+                    );
             };
 
             // Store listener for cleanup
             introEndedListener = switchToLoopingVideo;
-            introVideoElement.addEventListener('ended', introEndedListener, { once: true });
+            introVideoElement.addEventListener("ended", introEndedListener, {
+                once: true,
+            });
         }
 
         return () => {
             // Cleanup event listener
             if (introVideoElement && introEndedListener) {
-                introVideoElement.removeEventListener('ended', introEndedListener);
+                introVideoElement.removeEventListener(
+                    "ended",
+                    introEndedListener,
+                );
             }
             // Optional: pause videos if they might still be playing
             if (introVideoElement) {
@@ -51,19 +60,30 @@
             if (loopingVideoElement) {
                 loopingVideoElement.pause();
             }
-        }
+        };
     });
 </script>
 
 <div class="hero">
     <!-- Intro Video -->
-    <video bind:this={introVideoElement} autoplay muted class="hero-video-background">
+    <video
+        bind:this={introVideoElement}
+        autoplay
+        muted
+        class="hero-video-background"
+    >
         <!-- src will be set by script -->
         Your browser does not support the video tag.
     </video>
 
     <!-- Looping Video (initially hidden) -->
-    <video bind:this={loopingVideoElement} loop muted class="hero-video-background" style="display:none;">
+    <video
+        bind:this={loopingVideoElement}
+        loop
+        muted
+        class="hero-video-background"
+        style="display:none;"
+    >
         <!-- src will be set by script, loop and muted attributes are set -->
         Your browser does not support the video tag.
     </video>
@@ -81,29 +101,14 @@
     </div>
 </div>
 
-<section class="featured-articles">
-    <h2>Popular Articles</h2>
-    <div class="article-grid">
-        <a href="firm-foundation/library/is-jesus-god" class="article-card">
-            <h3>Is Jesus Really God?</h3>
-            <p>Explore the biblical evidence for the deity of Christ</p>
-        </a>
-        <a
-            href="firm-foundation/library/bible-reliability"
-            class="article-card"
-        >
-            <h3>Is the Bible Reliable?</h3>
-            <p>
-                Discover the historical and textual evidence for the Bible's
-                reliability
-            </p>
-        </a>
-        <a href="firm-foundation/library/trinity" class="article-card">
-            <h3>Understanding the Trinity</h3>
-            <p>Learn about the nature of God as three persons in one being</p>
-        </a>
+<div class="featured-articles">
+    <div class="left-text">
+        <h2>Intro to Christianity</h2>
+        <p>Learn the general concepts of Christianity in a single place.</p>
+        <a href="basics" class="cta-primary">Learn More</a>
     </div>
-</section>
+    <img src="creation.png" class="right-image" />
+</div>
 
 <div class="text-container">
     <ArticleTitle title="Is Jesus really God?" />
@@ -182,12 +187,11 @@
 <style>
     .hero {
         position: relative;
-        height: 80vh;
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 2rem;
         background: var(--background);
     }
 
@@ -251,44 +255,31 @@
     }
 
     .featured-articles {
-        padding: 4rem 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
+        margin: 0 10vw;
+        padding: 2.5vw;
+        display: flex;
+        align-items: center;
+        background-color: var(--background-2-trans);
+        border-radius: var(--primary-radius);
+        border: var(--border);
+        gap: 2.5vw;
+    }
+
+    .left-text {
+        width: 27.5vw;
+    }
+
+    .left-text p {
+        margin-bottom: 2em;
+    }
+
+    .right-image {
+        width: 47.5vw;
+        border-radius: var(--primary-radius);
     }
 
     .featured-articles h2 {
-        text-align: center;
         margin-bottom: 3rem;
-        color: var(--text);
-    }
-
-    .article-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
-    .article-card {
-        background: var(--background-2);
-        padding: 2rem;
-        border-radius: var(--secondary-radius);
-        text-decoration: none;
-        transition: transform 0.2s;
-    }
-
-    .article-card:hover {
-        transform: translateY(-4px);
-    }
-
-    .article-card h3 {
-        color: var(--primary);
-        margin: 0 0 1rem 0;
-    }
-
-    .article-card p {
-        color: var(--text);
-        margin: 0;
-        opacity: 0.9;
     }
 
     .text-container {

@@ -319,8 +319,8 @@
         width: 15vw;
         flex-shrink: 0;
         position: sticky;
-        top: 2.5vh;
-        height: 90vh;
+        top: 8.75vh;
+        height: 85vh;
         overflow-y: auto;
         background-color: var(--background-2-trans);
         backdrop-filter: blur(50px);
@@ -432,7 +432,7 @@
     .intro-container {
         padding-left: 10vw;
         padding-right: 10vw;
-        padding-top: 5vh;
+        padding-top: 15vh;
         color: var(--text);
         overflow-x: hidden; /* Prevent horizontal scroll from animations */
     }
