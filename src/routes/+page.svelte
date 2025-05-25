@@ -12,6 +12,14 @@
 
     let introEndedListener = null;
 
+    let featuredArticlesElement;
+    let mouseFollowerElement;
+
+    // Store listener functions for cleanup
+    let handleMouseMove = null;
+    let handleMouseEnter = null;
+    let handleMouseLeave = null;
+
     onMount(() => {
         if (introVideoElement && loopingVideoElement) {
             // Configure and start loading the looping video in the background
@@ -45,8 +53,36 @@
             });
         }
 
+        if (featuredArticlesElement && mouseFollowerElement) {
+            handleMouseMove = (event) => {
+                if (!featuredArticlesElement || !mouseFollowerElement) return;
+                const rect = featuredArticlesElement.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                // Apply transform to position the center of the follower at the mouse
+                // The second translate(-50%, -50%) centers the follower on the cursor
+                mouseFollowerElement.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+            };
+
+            handleMouseEnter = () => {
+                if (!mouseFollowerElement) return;
+                mouseFollowerElement.style.opacity = '1'; // Full opacity for the gradient effect
+            };
+
+            handleMouseLeave = () => {
+                if (!mouseFollowerElement) return;
+                mouseFollowerElement.style.opacity = '0';
+            };
+
+            featuredArticlesElement.addEventListener('mousemove', handleMouseMove);
+            featuredArticlesElement.addEventListener('mouseenter', handleMouseEnter);
+            featuredArticlesElement.addEventListener('mouseleave', handleMouseLeave);
+        }
+
+        // Original cleanup logic for videos
         return () => {
-            // Cleanup event listener
+            // Cleanup video event listener
             if (introVideoElement && introEndedListener) {
                 introVideoElement.removeEventListener(
                     "ended",
@@ -59,6 +95,19 @@
             }
             if (loopingVideoElement) {
                 loopingVideoElement.pause();
+            }
+
+            // Cleanup for mouse follower
+            if (featuredArticlesElement) {
+                if (handleMouseMove) {
+                    featuredArticlesElement.removeEventListener('mousemove', handleMouseMove);
+                }
+                if (handleMouseEnter) {
+                    featuredArticlesElement.removeEventListener('mouseenter', handleMouseEnter);
+                }
+                if (handleMouseLeave) {
+                    featuredArticlesElement.removeEventListener('mouseleave', handleMouseLeave);
+                }
             }
         };
     });
@@ -101,13 +150,14 @@
     </div>
 </div>
 
-<div class="featured-articles">
+<div class="featured-articles" bind:this={featuredArticlesElement}>
+    <div class="mouse-follower" bind:this={mouseFollowerElement}></div>
     <div class="left-text">
         <h2>Intro to Christianity</h2>
         <p>Learn the general concepts of Christianity in a single place.</p>
         <a href="basics" class="cta-primary">Learn More</a>
     </div>
-    <img src="creation.png" class="right-image" />
+    <img src="intro-to-christianity.png" class="right-image" />
 </div>
 
 <div class="text-container">
@@ -263,10 +313,21 @@
         border-radius: var(--primary-radius);
         border: var(--border);
         gap: 2.5vw;
+        position: relative; /* Required for absolute positioning of the mouse follower */
+        overflow: hidden; /* Ensures the follower is clipped to the div's bounds */
+        backdrop-filter: blur(150px);
+    }
+
+    /* Ensure content within featured-articles is above the follower */
+    .featured-articles > .left-text,
+    .featured-articles > .right-image {
+        position: relative; /* Establishes a stacking context */
+        z-index: 1;       /* Ensures content is above the mouse-follower (z-index: 0) */
     }
 
     .left-text {
         width: 27.5vw;
+        /* z-index will be managed by the rule above if it's a direct child */
     }
 
     .left-text p {
@@ -275,6 +336,7 @@
 
     .right-image {
         width: 47.5vw;
+        /* z-index will be managed by the rule above if it's a direct child */
         border-radius: var(--primary-radius);
     }
 
@@ -287,5 +349,20 @@
         text-align: justify;
         margin-left: 20vw;
         margin-right: 20vw;
+    }
+
+    .mouse-follower {
+        position: absolute;
+        width: 25vw;  /* Adjust size as needed */
+        height: 25vw; /* Adjust size as needed */
+        background: rgb(from var(--primary) r g b / 0.5);
+        border-radius: 50%;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease-out, transform 0.05s linear; /* Smooth fade and slight movement easing */
+        pointer-events: none; /* Prevents the circle from interfering with mouse events */
+        z-index: 0; /* Below content (z-index: 1), but above parent's background */
+        top: 0; /* Initial position, transform will handle actual placement */
+        left: 0; /* Initial position, transform will handle actual placement */
+        filter: blur(150px);
     }
 </style>
