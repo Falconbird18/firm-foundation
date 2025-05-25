@@ -59,14 +59,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 1.5rem;
-        max-width: 1400px;
+        padding: 1rem 10vw;
         margin: 0 auto;
     }
 
     .nav-left, .nav-right {
         display: flex;
         align-items: center;
+        justify-content: space-around;
         gap: 2rem;
     }
 
