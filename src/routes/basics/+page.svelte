@@ -11,19 +11,29 @@
     let noHeaderSectionRef; // Will hold the DOM element with id="no-header"
     let activeSectionId = ""; // Holds the ID of the currently active section for sidebar
 
+    // Form state
+    let firstName = "";
+    let lastName = "";
+    let submissionStatus = ""; // '', 'submitting', 'success', 'error'
+    let showNotification = false;
+
+    const googleFormUrl =
+        "https://docs.google.com/forms/d/e/1FAIpQLSfV1RFbaoc-tBMALGae3aJvMFKIpbkaBtGoVeut5iwhhbLU_g/formResponse";
+    const googleFormFirstNameEntry = "entry.1933726439";
+    const googleFormLastNameEntry = "entry.1373301618";
+
+    // Debounce timer for notification
+    let notificationTimer = null;
+
     const handlePageScroll = () => {
         if (noHeaderSectionRef) {
             const rect = noHeaderSectionRef.getBoundingClientRect();
-            // Hide header if the 'no-header' section's top is at or above viewport top (<=0),
-            // AND its bottom is still below the viewport top (>0) (i.e., it's actively at the top).
             if (rect.top <= 0 && rect.bottom > 0) {
                 isLayoutHeaderVisible.set(false);
             } else {
                 isLayoutHeaderVisible.set(true);
             }
         } else {
-            // If this page doesn't have an element with id="no-header",
-            // or it's not found, ensure layout header is visible.
             isLayoutHeaderVisible.set(true);
         }
     };
@@ -85,6 +95,37 @@
             isLayoutHeaderVisible.set(true);
         };
     });
+
+    async function handleSubmit() {
+        submissionStatus = "submitting";
+        showNotification = false; // Hide previous notification if any
+        clearTimeout(notificationTimer); // Clear any existing timer
+
+        const formData = new FormData();
+        formData.append(googleFormFirstNameEntry, firstName);
+        formData.append(googleFormLastNameEntry, lastName);
+
+        try {
+            await fetch(googleFormUrl, {
+                method: "POST",
+                mode: "no-cors", // Google Forms doesn't support CORS for AJAX, so we can't read the response
+                body: new URLSearchParams(formData), // Sends as application/x-www-form-urlencoded
+            });
+            submissionStatus = "success";
+            firstName = ""; // Clear fields
+            lastName = "";
+        } catch (error) {
+            console.error("Form submission error:", error);
+            submissionStatus = "error";
+        } finally {
+            showNotification = true;
+            const duration = submissionStatus === "success" ? 3000 : 5000;
+            notificationTimer = setTimeout(() => {
+                showNotification = false;
+                submissionStatus = ""; // Reset status after notification hides
+            }, duration);
+        }
+    }
 </script>
 
 <div class="intro-container">
@@ -99,17 +140,18 @@
                 hope in a fun and engaging way.
             </p>
         </div>
-        <img src="front.png" class="right-image" />
+        <img src="intro-to-christianity.png" class="right-image" />
     </header>
 </div>
 
-<div class="page-layout">
+<div class="page-layout" id="no-header">
     <nav class="sidebar">
         <ul>
             <li>
                 <a
                     href="#creation"
-                    class:active={activeSectionId === "creation"}>Creation</a
+                    class:active={activeSectionId === "creation"}
+                    >The Creation</a
                 >
             </li>
             <li>
@@ -120,15 +162,23 @@
             </li>
             <li>
                 <a
-                    href="#the-promise"
-                    class:active={activeSectionId === "the-promise"}
-                    >The Promise</a
+                    href="#the-miracle"
+                    class:active={activeSectionId === "the-miracle"}
+                    >The Miracle</a
                 >
             </li>
             <li>
                 <a
-                    href="#new-hope"
-                    class:active={activeSectionId === "new-hope"}>A New Hope</a
+                    href="#the-sacrifice"
+                    class:active={activeSectionId === "the-sacrifice"}
+                    >The Sacrifice</a
+                >
+            </li>
+            <li>
+                <a
+                    href="#the-judgement"
+                    class:active={activeSectionId === "the-judgement"}
+                    >The Judgement</a
                 >
             </li>
         </ul>
@@ -277,31 +327,161 @@
             </div>
         </section>
 
-        <section class="content-section" id="the-promise">
-            <h1 class="colored-header">The Promise</h1>
+        <section class="content-section" id="the-miracle">
+            <h1 class="colored-header">God in human form</h1>
             <img src="creation.png" class="card-image" />
-            <p class="card-text">
-                Genesis 1:1 says <Quote
-                    quote="In the beginning God created the heavens and the earth."
-                /> Christians believe that God created the universe in 6 days approximately
-                6,000 years ago, and that God created man in his own image.
-            </p>
+            <div class="card-flex">
+                <div class="card-text">
+                    <p>
+                        God became man in the form of Jesus in order to liAdam
+                        and Eve were happy. They lived in perfect harmony with
+                        God and had fulfilling work to do <BibleCitation
+                            verseRef="Genesis 1:28"
+                            verseText={'God blessed them; and God said to them, "Be fruitful and multiply, and fill the earth, and subdue it; and rule over the fish of the sea and over the birds of the sky and over every living thing that moves on the earth."'}
+                        />. However, Adam and Eve sinned and introduced death
+                        and disease to the world.
+                    </p>
+                </div>
+            </div>
+            <div class="sub-cards-container">
+                <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
+                    <h2>The first sin</h2>
+                    <p>
+                        Adam and Eve sinned when they ate the fruit of the tree
+                        of the knowledge of good and evil
+                        <BibleCitation
+                            verseRef="Genesis 3:6"
+                            verseText={"When the woman saw that the tree was good for food, and that it was a delight to the eyes, and that the tree was desirable to make _one_ wise, she took from its fruit and ate; and she gave also to her husband with her, and he ate."}
+                        />, which God had commanded them not to eat
+                        <BibleCitation
+                            verseRef="Genesis 2:16-17"
+                            verseText={'[v16]The Lord God commanded the man, saying, "From any tree of the garden you may eat freely; [v17] but from the tree of the knowledge of good and evil you shall not eat, for in the day that you eat from it you will surely die."'}
+                        />
+                        after they had been deceived by Satan, a fallen archangel
+                        who was in the form of a snake
+                        <BibleCitation
+                            verseRef="Revelation 12:9"
+                            verseText={"And the great dragon was thrown down, the serpent of old who is called the devil and Satan, who deceives the whole world; he was thrown down to the earth, and his angels were thrown down with him."}
+                        />. By sinning, Adam and Eve disobeyed God and brought
+                        death and disease into the world
+                        <BibleCitation
+                            verseRef="Genesis 3:17-19"
+                            verseText={'[v17]Then to Adam He said, "Because you have listened to the voice of your wife, and have eaten from the tree about which I commanded you, saying, \'You shall not eat from it\'; Cursed is the ground because of you; [br] In toil you will eat of it [br] All the days of your life. [v18]"Both thorns and thistles it shall grow for you; [br] And you will eat the plants of the field; By the sweat of your face [br] You will eat bread, [br] Till you return to the ground [br] Because from it you were taken; [br] For you are dust, [br] And to dust you shall return.""'}
+                            wide
+                        />
+                        <BibleCitation
+                            verseRef="Romans 5:12"
+                            verseText={"Therefore, just as through one man sin entered into the world, and death through sin, and so death spread to all men, because all sinned"}
+                        />
+                        and the whole of creation was affected by their sin
+                        <BibleCitation
+                            verseRef="Romans 8:20-22"
+                            verseText={"[v20]For the creation was subjected to futility, not willingly, but because of Him who subjected it, in hope [v21] that the creation itself also will be set free from its slavery to corruption into the freedom of the glory of the children of God. [v22]For we know that the whole creation groans and suffers the pains of childbirth together until now."}
+                        />.
+                    </p>
+                </div>
+                <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
+                    <h2>The expulsion</h2>
+                    <p>
+                        As a result of their disobedience, Adam and Eve were
+                        expelled from the Garden of Eden
+                        <BibleCitation
+                            verseRef="Genesis 3:23-24"
+                            verseText={"[v23]therefore the Lord God sent him out from the garden of Eden, to cultivate the ground from which he was taken. [v24]So He drove the man out; and at the east of the garden of Eden He stationed the cherubim and the flaming sword which turned every direction to guard the way to the tree of life."}
+                        />. This marked the end of humanity's direct
+                        relationship with God in the Garden and the beginning of
+                        a new chapter in human history.
+                    </p>
+                </div>
+            </div>
+            <div class="sub-cards-container">
+                <div class="sub-card">
+                    <img src="creation.png" class="card-image" />
+                    <h2>The promise</h2>
+                    <p>
+                        Despite the consequences of sin, God gave Adam and Eve
+                        hope for the future by promising to send a Savior who
+                        would defeat Satan and restore humanity's relationship
+                        with God
+                        <BibleCitation
+                            verseRef="Genesis 3:15"
+                            verseText={"And I will put enmity Between you and the woman, [br] And between your seed and her seed; [br] He shall bruise you on the head, [br] And you shall bruise him on the heel."}
+                        />. This promise was the first glimpse of God's plan of
+                        redemption, which would ultimately be fulfilled through
+                        Jesus Christ.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="the-sacrifice">
+            <h1 class="colored-header">The Sacrifice</h1>
+            <img src="creation.png" class="card-image" />
+            <div class="card-flex">
+                <div class="card-text">
+                    <p>
+                        At the heart of the Christian faith is the ultimate
+                        sacrifice of Jesus Christ. Believers understand that
+                        Jesus, being both fully God and fully man, died on the
+                        cross to atone for the sins of humanity, offering a path
+                        to reconciliation with God. This act of love is
+                        foundational to Christian belief and practice.
+                    </p>
+                </div>
+            </div>
             <a href="/library" class="cta-primary">Learn more</a>
         </section>
 
-        <section class="content-section" id="new-hope">
-            <h1 class="colored-header">A New Hope</h1>
+        <section class="content-section" id="the-judgement">
+            <h1 class="colored-header">The Judgement</h1>
             <img src="creation.png" class="card-image" />
-            <p class="card-text">
-                Genesis 1:1 says <Quote
-                    quote="In the beginning God created the heavens and the earth."
-                /> Christians believe that God created the universe in 6 days approximately
-                6,000 years ago, and that God created man in his own image.
-            </p>
+            <div class="card-flex">
+                <div class="card-text">
+                    <p>
+                        Christian theology teaches that there will be a final
+                        judgement where all people will be accountable to God
+                        for their lives. This concept underscores the importance
+                        of faith, repentance, and living according to God's
+                        teachings, with the promise of eternal life for those
+                        who believe in Jesus Christ.
+                    </p>
+                </div>
+            </div>
             <a href="/library" class="cta-primary">Learn more</a>
         </section>
     </main>
 </div>
+<div class="form-container">
+    <h2>Contact Us (Basics Page)</h2> <!-- Added a title for clarity -->
+    <form on:submit|preventDefault={handleSubmit} id="gform">
+        <h3>First name:</h3><br />
+        <input
+            type="text"
+            bind:value={firstName}
+            placeholder="Enter your first name"
+            required
+        /><br />
+        <h3>Last name:</h3><br />
+        <input
+            type="text"
+            bind:value={lastName}
+            placeholder="Enter your last name"
+            required
+        />
+        <button type="submit" disabled={submissionStatus === 'submitting'}>
+            {#if submissionStatus === 'submitting'}Submitting...{:else}Submit{/if}
+        </button>
+    </form>
+    {#if showNotification && (submissionStatus === 'success' || submissionStatus === 'error')}
+        <div class="notification" class:success={submissionStatus === 'success'} class:error={submissionStatus === 'error'}>
+            {submissionStatus === 'success' ? 'Message sent successfully!' : 'Failed to send message. Please try again.'}
+        </div>
+    {/if}
+</div>
+
+<!-- https://docs.google.com/forms/d/e/1FAIpQLSfV1RFbaoc-tBMALGae3aJvMFKIpbkaBtGoVeut5iwhhbLU_g/viewform?usp=pp_url&entry.1933726439=FirstName&entry.1373301618=LastName -->
 
 <style>
     :global(html) {
@@ -319,8 +499,8 @@
         width: 15vw;
         flex-shrink: 0;
         position: sticky;
-        top: 8.75vh;
-        height: 85vh;
+        top: 3.75vh;
+        height: 90vh;
         overflow-y: auto;
         background-color: var(--background-2-trans);
         backdrop-filter: blur(50px);
@@ -357,7 +537,7 @@
     }
 
     .sidebar li a:hover {
-        background-color: var(--background-2);
+        background-color: #0000002d;
     }
 
     .main-content {
@@ -468,5 +648,78 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         width: fit-content;
+    }
+
+    .form-container {
+        padding: 2rem 10vw; /* Added top/bottom padding */
+        text-align: center; /* Center the h2 */
+    }
+
+    .form-container h2 {
+        margin-bottom: 1.5rem;
+        color: var(--text);
+    }
+
+    /* The form itself, previously just #gform implicitly */
+    #gform {
+        padding: 2.5vw;
+        background-color: var(--background-2-trans);
+        backdrop-filter: blur(50px);
+        border-radius: var(--primary-radius);
+        border: var(--border);
+        display: inline-block; /* To allow text-align:center on parent to work if desired, or set margins */
+        text-align: left; /* Align form content to the left */
+    }
+
+    #gform h3 {
+        color: var(--text);
+        margin-bottom: 0.25rem;
+        margin-top: 0.5rem;
+    }
+
+    #gform input[type="text"] {
+        padding: 0.75rem;
+        border-radius: calc(var(--primary-radius) / 2);
+        border: var(--border);
+        background-color: var(--background);
+        color: var(--text);
+        width: 100%; /* Make inputs take full width of their container */
+        box-sizing: border-box;
+        margin-bottom: 1rem;
+    }
+
+    #gform button {
+        /* Using existing .cta-primary styles as a base and customizing */
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--primary-radius);
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: white; /* Explicitly white for buttons */
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-family: "Roboto", sans-serif; /* Match other CTAs */
+        font-weight: 300; /* Match other CTAs */
+        transition: all 0.3s ease;
+        display: block; /* Make button take full width or use margin: auto to center */
+        margin: 1rem auto 0; /* Center button */
+    }
+
+    #gform button:disabled {
+        background: grey;
+        cursor: not-allowed;
+    }
+
+    .notification {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-radius: var(--primary-radius);
+        color: white;
+        text-align: center;
+    }
+    .notification.success {
+        background-color: var(--success-color, #28a745); /* Use CSS var if defined, else fallback */
+    }
+    .notification.error {
+        background-color: var(--error-color, #dc3545); /* Use CSS var if defined, else fallback */
     }
 </style>

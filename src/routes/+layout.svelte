@@ -1,4 +1,6 @@
 <script>
+    import { fly, fade } from "svelte/transition";
+    import { quintOut } from "svelte/easing"; // For smoother animations
     import "../app.css";
     import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
 
