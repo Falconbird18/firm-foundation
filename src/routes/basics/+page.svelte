@@ -12,21 +12,26 @@
     let activeSectionId = ""; // Holds the ID of the currently active section for sidebar
 
     // Form state
-    let firstName = "";
-    let lastName = "";
+    let formFullName = "";
+    let formEmail = "";
+    let formMessage = "";
     let submissionStatus = ""; // '', 'submitting', 'success', 'error'
     let showNotification = false;
 
     const googleFormUrl =
         "https://docs.google.com/forms/d/e/1FAIpQLSfV1RFbaoc-tBMALGae3aJvMFKIpbkaBtGoVeut5iwhhbLU_g/formResponse";
-    const googleFormFirstNameEntry = "entry.1933726439";
-    const googleFormLastNameEntry = "entry.1373301618";
+    // IMPORTANT: Replace 'entry.YOUR_FULL_NAME_FIELD_ID' with the actual entry ID from your Google Form for the full name field.
+    const googleFormFullNameEntry = "entry.YOUR_FULL_NAME_FIELD_ID"; // For "Full Name"
+    // IMPORTANT: Replace 'entry.YOUR_EMAIL_FIELD_ID' with the actual entry ID from your Google Form for the email field.
+    const googleFormEmailEntry = "entry.YOUR_EMAIL_FIELD_ID"; // For "Email"
+    const googleFormMessageEntry = "entry.304407693";
 
     // Debounce timer for notification
     let notificationTimer = null;
 
     const handlePageScroll = () => {
         if (noHeaderSectionRef) {
+            // @ts-ignore
             const rect = noHeaderSectionRef.getBoundingClientRect();
             if (rect.top <= 0 && rect.bottom > 0) {
                 isLayoutHeaderVisible.set(false);
@@ -38,6 +43,9 @@
         }
     };
 
+    let emailError = "";
+    let fullNameError = "";
+    let messageError = "";
     onMount(() => {
         noHeaderSectionRef = document.getElementById("no-header");
         const sections = Array.from(
@@ -50,6 +58,7 @@
         if (sections.length > 0) {
             // Set initial active section if one is at the top, otherwise default to first
             // The observer will quickly correct this if needed.
+            // @ts-ignore
             const firstSectionRect = sections[0].getBoundingClientRect();
             if (
                 firstSectionRect.top <= SCROLL_TARGET_OFFSET + 5 &&
@@ -57,9 +66,11 @@
             ) {
                 activeSectionId = sections[0].id;
             } else if (
+                // @ts-ignore
                 firstSectionRect.top < SCROLL_TARGET_OFFSET &&
                 firstSectionRect.bottom > SCROLL_TARGET_OFFSET
             ) {
+                // @ts-ignore
                 activeSectionId = sections[0].id;
             } else if (window.scrollY === 0) {
                 activeSectionId = sections[0].id;
@@ -75,6 +86,7 @@
         const observerCallback = (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
+                    // @ts-ignore
                     activeSectionId = entry.target.id;
                 }
             });
@@ -96,24 +108,62 @@
         };
     });
 
+    function isValidEmail(email) {
+        // Basic regex for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
     async function handleSubmit() {
+        emailError = ""; // Reset email error on new submission attempt
+        fullNameError = ""; // Reset full name error
+        messageError = ""; // Reset message error
+
+        if (!formFullName.trim()) {
+            fullNameError = "Please enter your full name.";
+            // No return here yet, let all validations run to show all errors at once if desired,
+            // or return early: if (fullNameError) return;
+        }
+
+        if (!formEmail || !isValidEmail(formEmail)) {
+            emailError = "Please enter a valid email address.";
+        }
+
+        if (!formMessage.trim()) {
+            messageError = "Please enter a message.";
+        }
+
         submissionStatus = "submitting";
         showNotification = false; // Hide previous notification if any
         clearTimeout(notificationTimer); // Clear any existing timer
 
         const formData = new FormData();
-        formData.append(googleFormFirstNameEntry, firstName);
-        formData.append(googleFormLastNameEntry, lastName);
+        // Only proceed if all validations pass
+        if (fullNameError || emailError || messageError) {
+            submissionStatus = ""; // Reset submission status as we didn't actually submit
+            return;
+        }
+        formData.append(googleFormFullNameEntry, formFullName);
+        formData.append(googleFormEmailEntry, formEmail);
+        formData.append(googleFormMessageEntry, formMessage);
 
         try {
             await fetch(googleFormUrl, {
                 method: "POST",
                 mode: "no-cors", // Google Forms doesn't support CORS for AJAX, so we can't read the response
                 body: new URLSearchParams(formData), // Sends as application/x-www-form-urlencoded
+                headers: {
+                    // Though 'no-cors' limits what we can send/receive, this is good practice
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
             });
             submissionStatus = "success";
-            firstName = ""; // Clear fields
-            lastName = "";
+            formFullName = ""; // Clear fields
+            formEmail = "";
+            formMessage = "";
+            emailError = ""; // Clear email error on success
+            fullNameError = ""; // Clear full name error on success
+            messageError = ""; // Clear message error on success
         } catch (error) {
             console.error("Form submission error:", error);
             submissionStatus = "error";
@@ -124,6 +174,25 @@
                 showNotification = false;
                 submissionStatus = ""; // Reset status after notification hides
             }, duration);
+        }
+    }
+
+    // Reactive statement to clear email error when user types a valid email
+    $: if (formEmail && emailError) {
+        if (isValidEmail(formEmail)) {
+            emailError = "";
+        }
+    }
+    // Reactive statement to clear full name error when user types
+    $: if (formFullName && fullNameError) {
+        if (formFullName.trim()) {
+            fullNameError = "";
+        }
+    }
+    // Reactive statement to clear message error when user types
+    $: if (formMessage && messageError) {
+        if (formMessage.trim()) {
+            messageError = "";
         }
     }
 </script>
@@ -454,29 +523,72 @@
     </main>
 </div>
 <div class="form-container">
-    <h2>Contact Us (Basics Page)</h2> <!-- Added a title for clarity -->
+    <h2>Contact Us (Basics Page)</h2>
+    <!-- Added a title for clarity -->
     <form on:submit|preventDefault={handleSubmit} id="gform">
-        <h3>First name:</h3><br />
+        <h3>Full Name:</h3>
+        <br />
         <input
             type="text"
-            bind:value={firstName}
-            placeholder="Enter your first name"
+            bind:value={formFullName}
+            placeholder="Enter your full name"
             required
-        /><br />
-        <h3>Last name:</h3><br />
-        <input
-            type="text"
-            bind:value={lastName}
-            placeholder="Enter your last name"
-            required
+            aria-invalid={fullNameError ? "true" : "false"}
+            aria-describedby="fullname-error-message"
         />
-        <button type="submit" disabled={submissionStatus === 'submitting'}>
-            {#if submissionStatus === 'submitting'}Submitting...{:else}Submit{/if}
+        {#if fullNameError}
+            <p id="fullname-error-message" class="error-message" role="alert">
+                {fullNameError}
+            </p>
+        {/if}
+        <br />
+        <h3>Email:</h3>
+        <br />
+        <input
+            type="email"
+            bind:value={formEmail}
+            placeholder="Enter your email"
+            required
+            aria-invalid={emailError ? "true" : "false"}
+            aria-describedby="email-error-message"
+        />
+        {#if emailError}
+            <p id="email-error-message" class="error-message" role="alert">
+                {emailError}
+            </p>
+        {/if}
+        <h3>Message</h3>
+        <br />
+        <textarea
+            bind:value={formMessage}
+            placeholder="Enter your message"
+            required
+            rows="5"
+            aria-invalid={messageError ? "true" : "false"}
+            aria-describedby="message-error-message"
+        ></textarea>
+        {#if messageError}
+            <p id="message-error-message" class="error-message" role="alert">
+                {messageError}
+            </p>
+        {/if}
+        <button
+            type="submit"
+            disabled={submissionStatus === "submitting" ||
+                !!emailError || !!fullNameError || !!messageError}
+        >
+            {#if submissionStatus === "submitting"}Submitting...{:else}Submit{/if}
         </button>
     </form>
-    {#if showNotification && (submissionStatus === 'success' || submissionStatus === 'error')}
-        <div class="notification" class:success={submissionStatus === 'success'} class:error={submissionStatus === 'error'}>
-            {submissionStatus === 'success' ? 'Message sent successfully!' : 'Failed to send message. Please try again.'}
+    {#if showNotification && (submissionStatus === "success" || submissionStatus === "error")}
+        <div
+            class="notification"
+            class:success={submissionStatus === "success"}
+            class:error={submissionStatus === "error"}
+        >
+            {submissionStatus === "success"
+                ? "Message sent successfully!"
+                : "Failed to send message. Please try again."}
         </div>
     {/if}
 </div>
@@ -677,7 +789,9 @@
         margin-top: 0.5rem;
     }
 
-    #gform input[type="text"] {
+    #gform input[type="text"],
+    #gform input[type="email"],
+    #gform textarea {
         padding: 0.75rem;
         border-radius: calc(var(--primary-radius) / 2);
         border: var(--border);
@@ -686,6 +800,11 @@
         width: 100%; /* Make inputs take full width of their container */
         box-sizing: border-box;
         margin-bottom: 1rem;
+        font-family: inherit; /* Ensure textarea inherits font */
+    }
+
+    #gform textarea {
+        resize: vertical; /* Allow vertical resizing */
     }
 
     #gform button {
@@ -717,9 +836,22 @@
         text-align: center;
     }
     .notification.success {
-        background-color: var(--success-color, #28a745); /* Use CSS var if defined, else fallback */
+        background-color: var(
+            --success-color,
+            #28a745
+        ); /* Use CSS var if defined, else fallback */
     }
     .notification.error {
-        background-color: var(--error-color, #dc3545); /* Use CSS var if defined, else fallback */
+        background-color: var(
+            --error-color,
+            #dc3545
+        ); /* Use CSS var if defined, else fallback */
+    }
+
+    .error-message {
+        color: var(--error-color, #dc3545); /* Or your theme's error color */
+        font-size: 0.9rem;
+        margin-top: -0.75rem; /* Adjust to position nicely below the input */
+        margin-bottom: 0.5rem;
     }
 </style>
