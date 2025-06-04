@@ -1,6 +1,8 @@
 /* Global CSS Variables */
 :root {
     --primary: #3979eb;
+    --success: #38ED8C;
+    --warning: #ED5038;
     --secondary: #eb308f;
     --background: #21252C;
     --background-2: #202020;

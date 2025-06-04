@@ -20,10 +20,8 @@
 
     const googleFormUrl =
         "https://docs.google.com/forms/d/e/1FAIpQLSfV1RFbaoc-tBMALGae3aJvMFKIpbkaBtGoVeut5iwhhbLU_g/formResponse";
-    // IMPORTANT: Replace 'entry.YOUR_FULL_NAME_FIELD_ID' with the actual entry ID from your Google Form for the full name field.
-    const googleFormFullNameEntry = "entry.YOUR_FULL_NAME_FIELD_ID"; // For "Full Name"
-    // IMPORTANT: Replace 'entry.YOUR_EMAIL_FIELD_ID' with the actual entry ID from your Google Form for the email field.
-    const googleFormEmailEntry = "entry.YOUR_EMAIL_FIELD_ID"; // For "Email"
+    const googleFormFullNameEntry = "entry.1933726439";
+    const googleFormEmailEntry = "entry.1373301618";
     const googleFormMessageEntry = "entry.304407693";
 
     // Debounce timer for notification
@@ -523,8 +521,7 @@
     </main>
 </div>
 <div class="form-container">
-    <h2>Contact Us (Basics Page)</h2>
-    <!-- Added a title for clarity -->
+    <h2>Contact</h2>
     <form on:submit|preventDefault={handleSubmit} id="gform">
         <h3>Full Name:</h3>
         <br />
@@ -765,6 +762,7 @@
     .form-container {
         padding: 2rem 10vw; /* Added top/bottom padding */
         text-align: center; /* Center the h2 */
+        background: linear-gradient(0, var(--background), var(--secondary));
     }
 
     .form-container h2 {
@@ -836,16 +834,10 @@
         text-align: center;
     }
     .notification.success {
-        background-color: var(
-            --success-color,
-            #28a745
-        ); /* Use CSS var if defined, else fallback */
+        background-color: var(--success);
     }
     .notification.error {
-        background-color: var(
-            --error-color,
-            #dc3545
-        ); /* Use CSS var if defined, else fallback */
+        background-color: var(--error);
     }
 
     .error-message {
