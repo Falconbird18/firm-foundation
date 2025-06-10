@@ -212,7 +212,7 @@
 </div>
 
 <div class="page-layout" id="no-header">
-    <nav class="sidebar">
+    <nav class="sidebar" id="glass">
         <ul>
             <li>
                 <a
@@ -268,7 +268,7 @@
                 </div>
             </div>
             <div class="sub-cards-container">
-                <div class="sub-card">
+                <div class="sub-card" id="glass">
                     <img src="creation.png" class="card-image" />
                     <h2>God created man</h2>
                     <p>
@@ -286,7 +286,7 @@
                         />.
                     </p>
                 </div>
-                <div class="sub-card">
+                <div class="sub-card" id="glass">
                     <img src="creation.png" class="card-image" />
                     <h2>The sabbath</h2>
                     <p>
@@ -572,7 +572,9 @@
         <button
             type="submit"
             disabled={submissionStatus === "submitting" ||
-                !!emailError || !!fullNameError || !!messageError}
+                !!emailError ||
+                !!fullNameError ||
+                !!messageError}
         >
             {#if submissionStatus === "submitting"}Submitting...{:else}Submit{/if}
         </button>
@@ -611,8 +613,8 @@
         top: 3.75vh;
         height: 90vh;
         overflow-y: auto;
-        background-color: var(--background-2-trans);
-        backdrop-filter: blur(50px);
+        /* background-color: var(--background-2-trans); */
+        backdrop-filter: blur(25px);
         border-radius: var(--primary-radius);
         padding: 1rem;
         border: 0.25px solid rgba(176, 176, 206, 0.1);
@@ -671,11 +673,7 @@
 
     .sub-card {
         flex: 1;
-        background-color: var(--background-2-trans);
-        /* backdrop-filter: blur(150px); */
         padding: 1rem;
-        border-radius: var(--primary-radius);
-        border: var(--border);
     }
 
     .card-image {

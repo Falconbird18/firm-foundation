@@ -26,7 +26,7 @@
 
 {#if $isLayoutHeaderVisible}
     <header bind:clientHeight={actualHeaderHeight} transition:fly={{ y: -20, duration: 300, easing: quintOut }}>
-        <nav class="main-nav">
+        <nav class="main-nav" id="glass">
             <div class="nav-left">
                 <a href="/" class="logo">
                     <img src="logo.svg" alt="Logo">
@@ -170,22 +170,23 @@
     }
 
     header {
-        background: var(--background-2-trans);
-        backdrop-filter: blur(150px);
-        border-bottom: var(--border);
         position: fixed;
         top: 0;
-        left: 0;
+        left: 10vw;
         right: 0;
+        width: 80vw;
         z-index: 100;
+        margin: 1em 0;
+        background: transparent;
+        border-radius: var(--border-radius);
     }
 
     .main-nav {
         display: flex;
+        box-sizing: border-box;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 10vw;
-        margin: 0 auto;
+        padding: 1rem;
     }
 
     .nav-left, .nav-right {

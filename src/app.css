@@ -20,11 +20,17 @@
 }
 
 /* You can also put other global styles here, like body defaults */
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
 body {
     background: #21252c;
     margin: 0;
 }
-
 h1 {
     font-family: 'Roboto';
     font-weight: 300;
@@ -74,4 +80,26 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+#glass {
+    backdrop-filter: blur(15px);
+    background: transparent;
+    border-radius: var(--primary-radius);
+}
+
+#glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    box-shadow:
+        inset 0px 0px 2px 1px rgba(255, 255, 255, 0.05),
+        inset 0px 3px 5px 3px rgba(255, 255, 255, 0.05),
+        inset 0px -3px 5px 5px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+    z-index: -1;
 }
