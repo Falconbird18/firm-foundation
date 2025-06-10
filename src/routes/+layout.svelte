@@ -3,6 +3,7 @@
     import { quintOut } from "svelte/easing"; // For smoother animations
     import "../app.css";
     import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
+    import Mouse from "$lib/components/Mouse.svelte";
 
     let actualHeaderHeight = 0; // Will be bound to the header's clientHeight
 
@@ -23,6 +24,8 @@
         }
     }
 </script>
+
+<Mouse />
 
 {#if $isLayoutHeaderVisible}
     <header bind:clientHeight={actualHeaderHeight} transition:fly={{ y: -20, duration: 300, easing: quintOut }}>

@@ -691,6 +691,7 @@
         flex: 1; /* Allow .card-flex to grow and fill remaining vertical space */
         justify-content: space-between;
         align-items: center;
+        z-index: 1;
     }
 
     .card-text {
@@ -698,6 +699,7 @@
         height: 100%;
         text-align: left;
         margin: 0;
+        z-index: 1;
     }
 
     .cta-primary {

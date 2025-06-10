@@ -1,14 +1,17 @@
 /* Global CSS Variables */
 :root {
-    --primary: #3979eb;
+    --primary: hsl(218, 82%, 57%);
+    --primary-hsl: 218, 82%, 57%;
     --success: #38ED8C;
     --warning: #ED5038;
     --secondary: #eb308f;
-    --background: #21252C;
+    --background: hsl(218, 14%, 15%);
+    --background-hsl: 218, 14%, 15%;
     --background-2: #202020;
     --background-2-trans: #20202025;
     --background-3: #363D49;
-    --text: #cad3f5;
+    --text: hsl(227, 68%, 88%);
+    --text-hsl: 227, 68%, 88%;
     --border: 0.25px solid rgba(176, 176, 206, 0.1);
     --primary-radius: 30px;
     --secondary-radius: 15px;
@@ -28,7 +31,7 @@ html {
 }
 
 body {
-    background: #21252c;
+    background: var(--background);
     margin: 0;
 }
 h1 {
@@ -36,6 +39,7 @@ h1 {
     font-weight: 300;
     font-size: 2.5rem;
     color: var(--text);
+    z-index: inherit;
 }
 
 h2 {
@@ -43,6 +47,7 @@ h2 {
     font-weight: 300;
     font-size: 2rem;
     color: var(--text);
+    z-index: inherit;
 }
 
 h3 {
@@ -50,6 +55,7 @@ h3 {
     font-weight: bold;
     font-size: 1.5rem;
     color: var(--text);
+    z-index: inherit;
 }
 
 p,
@@ -58,6 +64,7 @@ li {
     font-weight: 300;
     font-size: 1.25rem;
     color: var(--text);
+    z-index: inherit;
 }
 
 li {
@@ -97,9 +104,9 @@ a:hover {
     bottom: 0;
     border-radius: inherit;
     box-shadow:
-        inset 0px 0px 2px 1px rgba(255, 255, 255, 0.05),
-        inset 0px 3px 5px 3px rgba(255, 255, 255, 0.05),
-        inset 0px -3px 5px 5px rgba(0, 0, 0, 0.15);
+        inset 0px 0px 2px 1px hsla(var(--text-hsl), 0.15),
+        inset 0px 3px 5px 3px hsla(var(--text-hsl), 0.1),
+        inset 0px -3px 5px 5px hsla(var(--background-hsl), 0.5);
     pointer-events: none;
     z-index: -1;
 }

@@ -82,16 +82,36 @@
         transform: translateX(-50%) translateY(-8px);
         width: 15vw;
         padding: 1rem;
-        background-color: var(--background-2-trans);
-        backdrop-filter: blur(150px);
-        border: var(--border);
-        border-radius: var(--primary-radius);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         text-align: left;
         font-size: 0.9rem;
         line-height: 1.5;
         color: var(--text);
+
+        /* Applied glass styles directly to the popover */
+        background-color: var(--background-2-trans, rgba(32, 32, 32, 0.35)); /* Slightly opaque background */
+        backdrop-filter: blur(10px); /* Adjust blur as needed */
+        border-radius: var(--secondary-radius, 15px); /* Consistent with other smaller elements */
+        /* position: relative; is already set by position: absolute, good for ::before */
+    }
+
+    /* Edge effect for the popover's glass, similar to global #glass::before */
+    .citation-popover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit; /* Inherits from .citation-popover's border-radius */
+        /* Adjusted shadow for a potentially smaller element, or match global one if preferred */
+        box-shadow:
+            inset 0px 0px 1px 0px rgba(255, 255, 255, 0.07),
+            inset 0px 1px 2px 0px rgba(255, 255, 255, 0.05),
+            inset 0px -1px 2px 1px rgba(0, 0, 0, 0.12);
+        pointer-events: none;
+        /* Sits behind the popover's direct content but above its background-color */
+        z-index: -1; 
     }
 
     .citation-popover.popover-wide {
