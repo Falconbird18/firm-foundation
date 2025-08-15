@@ -67,17 +67,26 @@
 
             handleMouseEnter = () => {
                 if (!mouseFollowerElement) return;
-                mouseFollowerElement.style.opacity = '1'; // Full opacity for the gradient effect
+                mouseFollowerElement.style.opacity = "1"; // Full opacity for the gradient effect
             };
 
             handleMouseLeave = () => {
                 if (!mouseFollowerElement) return;
-                mouseFollowerElement.style.opacity = '0';
+                mouseFollowerElement.style.opacity = "0";
             };
 
-            featuredArticlesElement.addEventListener('mousemove', handleMouseMove);
-            featuredArticlesElement.addEventListener('mouseenter', handleMouseEnter);
-            featuredArticlesElement.addEventListener('mouseleave', handleMouseLeave);
+            featuredArticlesElement.addEventListener(
+                "mousemove",
+                handleMouseMove,
+            );
+            featuredArticlesElement.addEventListener(
+                "mouseenter",
+                handleMouseEnter,
+            );
+            featuredArticlesElement.addEventListener(
+                "mouseleave",
+                handleMouseLeave,
+            );
         }
 
         // Original cleanup logic for videos
@@ -100,13 +109,22 @@
             // Cleanup for mouse follower
             if (featuredArticlesElement) {
                 if (handleMouseMove) {
-                    featuredArticlesElement.removeEventListener('mousemove', handleMouseMove);
+                    featuredArticlesElement.removeEventListener(
+                        "mousemove",
+                        handleMouseMove,
+                    );
                 }
                 if (handleMouseEnter) {
-                    featuredArticlesElement.removeEventListener('mouseenter', handleMouseEnter);
+                    featuredArticlesElement.removeEventListener(
+                        "mouseenter",
+                        handleMouseEnter,
+                    );
                 }
                 if (handleMouseLeave) {
-                    featuredArticlesElement.removeEventListener('mouseleave', handleMouseLeave);
+                    featuredArticlesElement.removeEventListener(
+                        "mouseleave",
+                        handleMouseLeave,
+                    );
                 }
             }
         };
@@ -322,7 +340,7 @@
     .featured-articles > .left-text,
     .featured-articles > .right-image {
         position: relative; /* Establishes a stacking context */
-        z-index: 1;       /* Ensures content is above the mouse-follower (z-index: 0) */
+        z-index: 1; /* Ensures content is above the mouse-follower (z-index: 0) */
     }
 
     .left-text {
@@ -353,12 +371,14 @@
 
     .mouse-follower {
         position: absolute;
-        width: 25vw;  /* Adjust size as needed */
+        width: 25vw; /* Adjust size as needed */
         height: 25vw; /* Adjust size as needed */
         background: rgb(from var(--primary) r g b / 0.5);
         border-radius: 50%;
         opacity: 0; /* Initially hidden */
-        transition: opacity 0.3s ease-out, transform 0.05s linear; /* Smooth fade and slight movement easing */
+        transition:
+            opacity 0.3s ease-out,
+            transform 0.05s linear; /* Smooth fade and slight movement easing */
         pointer-events: none; /* Prevents the circle from interfering with mouse events */
         z-index: 0; /* Below content (z-index: 1), but above parent's background */
         top: 0; /* Initial position, transform will handle actual placement */

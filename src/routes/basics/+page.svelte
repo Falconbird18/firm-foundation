@@ -4,7 +4,7 @@
     import Quote from "$lib/components/Quote.svelte";
     import BibleCitation from "$lib/components/BibleCitation.svelte";
     import { onMount, onDestroy } from "svelte";
-    import { isLayoutHeaderVisible } from "$lib/stores/headerStore.js";
+    import { isLayoutHeaderVisible } from "$lib/stores/headerStore.ts";
 
     const SCROLL_TARGET_OFFSET = 80; // Should match .content-section scroll-margin-top
 
